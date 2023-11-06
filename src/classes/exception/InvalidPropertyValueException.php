@@ -1,11 +1,10 @@
 <?php
 
-namespace touiteur\auth;
-
+namespace touiteur\exception;
 
 use Exception;
 
-class AuthException extends Exception{
+class InvalidPropertyValueException extends Exception{
 
     public function __construct(string $message)
     {

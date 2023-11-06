@@ -1,16 +1,11 @@
 <?php
 
-namespace iutnc\deefy\auth;
+namespace touiteur\auth;
 
-require_once 'vendor/autoload.php';
-require_once 'AuthException.php';
-
-use iutnc\deefy\db\ConnectionFactory;
 use PDO;
 use User;
-
-class Auth
-{
+use touiteur\auth\AuthException;
+class Auth {
     /**
      * @throws AuthException
      */
