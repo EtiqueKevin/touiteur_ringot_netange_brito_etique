@@ -15,8 +15,8 @@ class ListeTouitesRenderer{
     public function render($selector): string{
         $html = "<div class='liste-touite'>";
 
-        foreach ($this->listeTouite->touites as $touite) {
-
+        foreach ($this->listeTouite->getTouitesListe() as $touite) {
+            $html .= (new TouiteRenderer($touite))->render($selector);
         }
 
         $html .= "</div>";

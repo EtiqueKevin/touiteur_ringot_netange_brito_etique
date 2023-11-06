@@ -18,7 +18,7 @@ class TouiteRenderer{
         switch ($selector){
             case 1:
                 try {
-                    $html .= "<h2>{$this->touite->__get('auteur')}</h2> <h3>{$this->touite->__get('auteur')}</h3>";
+                    $html .= "<h2>{$this->touite->__get('auteur')}</h2>";
                     $html .= "<p>{$this->touite->__get('texte')}</p>";
                 } catch (InvalidPropertyValueException $e) {
                     echo $e->getMessage();
@@ -27,7 +27,7 @@ class TouiteRenderer{
             break;
             case 2:
                 try {
-                    $html .= "<h2>{$this->touite->__get('auteur')}</h2> <h3>{$this->touite->__get('auteur')}</h3>";
+                    $html .= "<h2>{$this->touite->__get('auteur')}</h2> ";
                     $html .= "<p>{$this->touite->__get('texte')}</p>";
                     $html .= "<p>{$this->touite->__get('date')} | {$this->touite->__get('like')} | {$this->touite->__get('dislike')}  </p>";
                 } catch (InvalidPropertyValueException $e) {
@@ -37,7 +37,7 @@ class TouiteRenderer{
             break;
             default:
                 try {
-                    $html .= "<h2>{$this->touite->__get('auteur')}</h2> <h3>{$this->touite->__get('auteur')}</h3>";
+                    $html .= "<h2>{$this->touite->__get('auteur')}</h2> </h3>";
                     $html .= "<p>{$this->touite->__get('texte')}</p>";
                     $html .= "<p>{$this->touite->__get('date')}</p>";
                 } catch (InvalidPropertyValueException $e) {
