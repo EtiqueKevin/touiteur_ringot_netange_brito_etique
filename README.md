@@ -1,6 +1,6 @@
 # Touiteur
 > Description :
-Touiteur est un projet de développement d'un réseau social similaire à Twitter. Il a été réalisé dans le cadre de l'UE "Technologies du Web" de la licence informatique de l'Université de Nancy.
+Touiteur est un projet qui a pour but de développer une application web sécurisée similaire à Twitter.
 
 > Membres du groupe :
 > - [Etique Kévin]
