@@ -1,7 +1,7 @@
 <?php
 
 
-namespace iutnc\deefy\action;
+namespace touiteur\action;
 
 abstract class Action{
 

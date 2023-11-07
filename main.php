@@ -1,10 +1,12 @@
 <?php
 
+use touiteur\action\ActionConnexion;
 use touiteur\touites\Touite;
 use touiteur\touites\ListeTouite;
 use touiteur\renderer\ListeTouitesRenderer;
 
 require_once 'vendor/autoload.php';
+require_once 'src/classes/action/lib_touiteur.php';
 
 $t1 = new Touite(1, "Hello World!", "2023-01-01", "Brito");
 $t2 = new Touite(2, "Hello YOU", "2077-05-05", "Clement");
@@ -18,6 +20,9 @@ $listeTouite->addTouite($t3);
 $listeTouite->addTouite($t4);
 
 $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
+
+$ac = new ActionConnexion();
+echo $ac->execute();
 
 echo $listeTouiteRenderer->render(1);
 
