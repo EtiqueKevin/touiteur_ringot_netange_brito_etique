@@ -17,29 +17,23 @@ class ActionInscription extends Action {
             $values['pseudo'] = $values['nomprenom'] = $values['email'] = $values['naissance'] = '';
         }
 
-        $html ='<aside class="form">
+        $html ='<div id="auth">
         <p>Pour vous inscrire, merci de fournir les informations suivantes. </p>
         <form method="post" action="inscription.php">
         <table>';
-
-        $html.=em_aff_ligne_input('Votre pseudo :', array('type' => 'text', 'name' => 'pseudo', 'value' => $values['pseudo'],
-            'placeholder' => 'Minimum 4 caractères alphanumériques', 'required' => null));
-        $html.=em_aff_ligne_input('Votre mot de passe :', array('type' => 'password', 'name' => 'passe1', 'value' => '', 'required' => null));
-        $html.=em_aff_ligne_input('Répétez le mot de passe :', array('type' => 'password', 'name' => 'passe2', 'value' => '', 'required' => null));
-        $html.=em_aff_ligne_input('Nom et prénom :', array('type' => 'text', 'name' => 'nomprenom', 'value' => $values['nomprenom'], 'required' => null));
-        $html.=em_aff_ligne_input('Votre adresse email :', array('type' => 'email', 'name' => 'email', 'value' => $values['email'], 'required' => null));
-        $html.=em_aff_ligne_input('Votre date de naissance :', array('type' => 'date', 'name' => 'naissance', 'value' => $values['naissance'], 'required' => null));
+        $html.='<label for="pseudo">Votre pseudo</label><input type="text" name="pseudo" id="pseudo" placeholder="Minimum 4 caractères"><br>';
+        $html.='<label for="passe1">Votre mot de passe</label><input type="password" name="passe1" id="passe1" placeholder="Minimum 8 caractères"><br>';
+        $html.='<label for="passe2">Répétez le mot de passe</label><input type="password" name="passe2" id="passe2" placeholder="Minimum 8 caractères"><br>';
+        $html.='<label for="nomprenom">Votre nom et prénom</label><input type="text" name="nomprenom" id="nomprenom" placeholder="Votre nom et prénom"><br>';
+        $html.='<label for="email">Votre adresse email</label><input type="email" name="email" id="email" placeholder="Votre adresse email"><br><br>';
 
         $html.=
-        '<tr>
-        <td colspan="2">
-        <input type="submit" name="btnSInscrire" value="S\'inscrire">
-        <input type="reset" value="Réinitialiser">
-        </td>
-        </tr>
+        '
+        <input class=input type="submit" name="btnSInscrire" value="S\'inscrire">
+        <input class=input type="reset" value="Réinitialiser">
         </table>
         </form>
-        <br>Déjà inscrit(e),<a href="./index.php?action=connexion"> connectez-vous</a>.</aside>';
+        <br><a href="./index.php?action=connexion"><button>Déjà inscrit(e), connectez-vous</button</a></div>';
 
         return $html;
     }
