@@ -12,7 +12,7 @@ class ActionConnexion extends Action{
         // réaffichage des données soumises en cas d'erreur, sauf les mots de passe
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                Auth::authenticate($_POST['pseudo'], $_POST['passe']);
+                Auth::authenticate($_POST['email'], $_POST['passe']);
                 Auth::loadProfile($_POST['email']);
                 $html = "<p>Connexion réussie</p>";
                 $html .= "<a href='?action=home'> RETOUR</a>";
