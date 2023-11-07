@@ -51,13 +51,6 @@ class Touite{
         }
     }
 
-    public function aff_touite(){
-        return '<li>
-                <a href="utilisateur.php">'.$this->auteur.'</a> '.$this->aff_date().'<br>
-                <p>'.$this->texte.'</p><br>
-                <p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
-                </li>';
-    }
 
     /**
      * Transformation d'un date en clair.
