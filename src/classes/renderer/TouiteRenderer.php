@@ -18,11 +18,11 @@ class TouiteRenderer{
         switch ($selector){
             case 1:
                 try {
-                    $html .= '<li>
-                <h2><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a> </h2>'.$this->touite->aff_date().'<br>
-                <p>'.$this->touite->__get('auteur').'</p><br>
+                    $html .= '<div class="touite-head">
+                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a> </h2><p>'.$this->touite->aff_date().'</p><br></div> 
+                <p class="touite-content">'.$this->touite->__get('auteur').'</p><br>
                 <p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
-                </li>';
+                ';
                 } catch (InvalidPropertyValueException $e) {
                     echo $e->getMessage();
                 }
@@ -30,13 +30,13 @@ class TouiteRenderer{
                 break;
             case 2:
                 try {
-                    $html .= '<li>
-                    <h2><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a></h2> '.$this->touite->aff_date().'<br>
-                    <p>'.$this->touite->__get('texte').'</p><br>'.
+                    $html .= '
+                    <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a></h2> '.$this->touite->aff_date().'<br>
+                    <p class="touite-content">'.$this->touite->__get('texte').'</p><br>'.
                         '<img src="'. 'upload/'.$this->touite->__get('photo').'.jpg"'.
                         ' class="imgAuteur" alt="photo de l\'auteur">'.
                         '<p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
-                    </li>';
+                    ';
                 } catch (InvalidPropertyValueException $e) {
                     echo $e->getMessage();
                 }
@@ -44,12 +44,12 @@ class TouiteRenderer{
                 break;
             default:
                 try {
-                    $html .= '<li>
-                <a href="utilisateur.php">'.$this->touite->__get('auteur').'</a> '.$this->touite->aff_date().'<br>
-                <p>'.$this->touite->__get('texte').'</p><br>'.
+                    $html .= '
+                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a></h2> '.$this->touite->aff_date().'<br>
+                <p class="touite-content">'.$this->touite->__get('texte').'</p><br>'.
                         '<img src="'. 'upload/'.$this->touite->__get('photo').'.jpg"'.
                         ' class="imgAuteur" alt="photo de l\'auteur">'.'<p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
-                </li>';
+                ';
                 } catch (InvalidPropertyValueException $e) {
                     echo $e->getMessage();
                 }
