@@ -1,7 +1,34 @@
 <?php
 
+use touiteur\action\ActionConnexion;
+use touiteur\action\ActionInscription;
 
-echo "<!DOCTYPE html>
+require_once 'vendor/autoload.php';
+require_once 'src/classes/action/lib_touiteur.php';
+
+if (isset($_GET['action'])){
+    $action = $_GET['action'];
+}
+else{
+    $action = 'default';
+}
+
+switch ($_GET['action']){
+    case 'inscription':
+        $ai= new ActionInscription();
+        $html = $ai->execute();
+    break;
+    case 'connexion':
+        $ac = new ActionConnexion();
+        $html = $ac->execute();
+    break;
+    default:
+        $html = '<h1>Page d\'accueil</h1>';
+    break;
+}
+
+echo <<<HTML
+<!DOCTYPE html>
 <html lang='fr' >
 <head>
     <meta charset='UTF-8'>
@@ -13,13 +40,14 @@ echo "<!DOCTYPE html>
     <body>
     <nav class='navbar'>
         <div id='logo' >
-            <img src='ressources/logo_blanc.png' alt='logo' href='accueil.php'>
+            <a href="?action=default"><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
-                <button class='inscription' href='inscription.php'>Inscription</button>
-                <button class='connexion' href='connexion.php'>Connexion</button>
+                <a href="?action=inscription"><button class='inscription' >Inscription</button></a>
+                <a href="?action=connexion"><button class='connexion'>Connexion</button></a>
         </div>
     </nav>
-    
+HTML.$html.<<<HTML
     </body>
-</html>";
+</html>"
+HTML;
