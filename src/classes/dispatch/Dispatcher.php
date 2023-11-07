@@ -3,6 +3,7 @@
 namespace touiteur\dispatch;
 
 use touiteur\action\ActionConnexion;
+use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionGate;
 use touiteur\action\ActionInscription;
 
@@ -36,6 +37,10 @@ class Dispatcher{
             case 'page-utilisateur':
                 $html = '<h1>Page utilisateur</h1>';
             break;
+            case 'deconnexion':
+               $ad = new ActionDeconnexion();
+                $html = $ad->execute();
+            break;
             default:
                 $html = '<h1>Par default</h1>';
             break;
@@ -45,7 +50,20 @@ class Dispatcher{
         $d->renderPage($html);
     }
 
-    public function renderPage(string $h): void{
+    public function renderPage(string $h): void
+    {
+
+        if (isset($_SESSION['user'])) {
+        $k=<<<HTML
+            <a href="?action=page-utilisateur"><button class='profil'>Profil</button></a>
+            <a href="?action=deconnexion"><button class='deconnexion'>Déconnexion</button></a>
+HTML;
+        }else {
+            $k=<<<HTML
+                <a href="?action=inscription"><button class='inscription' >Inscription</button></a>
+                <a href="?action=connexion"><button class='connexion'>Connexion</button></a>
+HTML;
+             }
 
         echo <<<HTML
 <!DOCTYPE html>
@@ -63,8 +81,7 @@ class Dispatcher{
             <a href="?action=default"><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
-                <a href="?action=inscription"><button class='inscription' >Inscription</button></a>
-                <a href="?action=connexion"><button class='connexion'>Connexion</button></a>
+HTML.$k.<<<HTML
         </div>
     </nav>
 HTML.$h.<<<HTML
