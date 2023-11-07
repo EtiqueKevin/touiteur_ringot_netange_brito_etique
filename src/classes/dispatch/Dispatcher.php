@@ -12,12 +12,7 @@ require_once 'src/classes/action/lib_touiteur.php';
 class Dispatcher{
     public function run(): void{
 
-        if (isset($_GET['action'])){
-            $action = $_GET['action'];
-        }
-        else{
-            $action = 'gate';
-        }
+        $action = $_GET['action'] ?? 'gate';
 
 
         switch ($action){
@@ -54,6 +49,8 @@ class Dispatcher{
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='styles/index.css'>
+    <link rel='stylesheet' href='styles/gate.css'>
+    <link rel='stylesheet' href='styles/auth.css'>
 <title>Touiteur</title>
 </head>
 
@@ -69,7 +66,7 @@ class Dispatcher{
     </nav>
 HTML.$h.<<<HTML
     </body>
-</html>
+</html>"
 HTML;
     }
 

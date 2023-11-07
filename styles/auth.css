@@ -1,0 +1,33 @@
+#auth {
+  border-radius: 15px;
+  background-color: #dcffd9;
+  color: #000;
+  max-width: 600px;
+  max-height: 250px;
+    padding: 20px;
+  /* center the touites */
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+.input {
+    display: inline-block;
+  padding: 7px 15px;
+  background-color: #3a8646;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.input:hover {
+  background-color: #BEEF9E;
+    color: #000000;
+}
