@@ -33,6 +33,9 @@ class Dispatcher{
                 $ag = new ActionGate();
                 $html = $ag->execute();
             break;
+            case 'page-utilisateur':
+                $html = '<h1>Page utilisateur</h1>';
+            break;
             default:
                 $html = '<h1>Par default</h1>';
             break;
@@ -66,7 +69,7 @@ class Dispatcher{
     </nav>
 HTML.$h.<<<HTML
     </body>
-</html>"
+</html>
 HTML;
     }
 

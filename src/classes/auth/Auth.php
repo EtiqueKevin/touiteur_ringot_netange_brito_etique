@@ -3,6 +3,7 @@
 namespace touiteur\auth;
 
 use PDO;
+use touiteur\DataBase\ConnectionFactory;
 use User;
 use touiteur\auth\AuthException;
 class Auth {
