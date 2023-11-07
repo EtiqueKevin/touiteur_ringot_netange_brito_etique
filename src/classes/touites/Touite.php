@@ -17,7 +17,7 @@ class Touite{
 
     private $tag;
 
-    public function __construct(int $id, string $texte, string $date, string $auteur)
+    public function __construct(int $id, string $texte, int $date, string $auteur)
     {
         $this->id = $id;
         $this->texte = $texte;
@@ -49,6 +49,34 @@ class Touite{
         } else {
             throw new InvalidPropertyNameException("Property $property is not editable for a Touite.");
         }
+    }
+
+    public function aff_touite(){
+        return '<li>
+                <a href="utilisateur.php">'.$this->auteur.'</a> '.$this->aff_date().'<br>
+                <p>'.$this->texte.'</p><br>
+                <p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
+                </li>';
+    }
+
+    /**
+     * Transformation d'un date en clair.
+     *
+     * Aucune vérification n'est faite sur la validité de la date car
+     * on considère que c'est bien une date valide sous la forme aaaammjj
+     *
+     *
+     * @return string            La date sous la forme jj mois aaaa (1 janvier 2000)
+     */
+    public function aff_date():string{
+        $mois = array('', ' janvier ', ' février ', ' mars ', ' avril ', ' mai ', ' juin',
+            ' juillet ', ' aôut ', ' septembre ', ' octobre ', ' novembre ', ' décembre ');
+
+        $jj = (int)substr($this->date, -2);
+        $mm = (int)substr($this->date, -4, 2);
+
+        return $jj.$mois[$mm].substr($this->date, 0, -4); //fonctionne même si l'année est inférieure à 1000
+
     }
 
 }
