@@ -24,7 +24,7 @@ class ActionConnexion extends Action{
 		
 		</form>
 		<br>
-		<a href="./index.php?action=inscription"><button>Pas encore de compte, inscrivez-vous sans tarder!</button></a><br></div>';
+		<a href="./index.php?action=inscription"><button class="button">Pas encore de compte, inscrivez-vous sans tarder!</button></a><br></div>';
         return $html;
     }
 

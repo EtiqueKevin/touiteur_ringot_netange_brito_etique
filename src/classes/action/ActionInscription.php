@@ -34,7 +34,7 @@ class ActionInscription extends Action {
         <input class=button type="reset" value="Réinitialiser">
         
         </form>
-        <br><a href="./index.php?action=connexion"><button>Déjà inscrit(e), connectez-vous</button</a></div>';
+        <br><a href="./index.php?action=connexion"><button class="button">Déjà inscrit(e), connectez-vous</button</a></div>';
 
         return $html;
     }
