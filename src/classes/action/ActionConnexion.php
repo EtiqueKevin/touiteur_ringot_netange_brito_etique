@@ -13,17 +13,18 @@ class ActionConnexion extends Action{
         else{
             $values['pseudo'] = $values['nomprenom'] = $values['email'] = $values['naissance'] = '';
         }
-        $html= '<form method="post"><table>';
-        $html.= em_aff_ligne_input( 'Votre pseudo :', array('type' => 'text', 'name' => 'pseudo', 'value' => '', 'required' => null));
-        $html.= em_aff_ligne_input('Votre mot de passe :', array('type' => 'password', 'name' => 'pass1', 'value' => '', 'required' => null));
+        $html= '<div id="auth"> 
+        <h1>Connexion</h1> 
+        <form method="post">';
+        $html.='<label for="pseudo">Votre pseudo</label><input type="text" name="pseudo" id="pseudo" placeholder="Minimum 4 caractères"><br>';
+        $html.='<label for="passe1">Votre mot de passe</label><input type="password" name="passe" id="passe" placeholder="Minimum 8 caractères"><br><br>';
 
-        $html.= '<tr>
-				<td colspan="2" > <input  type="submit" name="btnConnexion" value="Connexion" /></td>
-			</tr>
-			</tbody>
-		</table>
+        $html.= '
+				<input class="input" type="submit" name="btnConnexion" value="Connexion" />
+		
 		</form>
-		<p>Pas encore de compte?<a href="./index.php?action=inscription"> Inscrivez-vous</a> sans tarder!<br>';
+		<br>
+		<a href="./index.php?action=inscription"><button>Pas encore de compte, inscrivez-vous sans tarder!</button></a><br></div>';
         return $html;
     }
 
