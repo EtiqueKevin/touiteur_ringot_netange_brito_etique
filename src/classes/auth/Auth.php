@@ -32,40 +32,39 @@ class Auth {
 
     }
 
-    public static function register(string $email, string $passwd): void{
+    public static function register(string $pseudo, string $passwd): void{
         $bd = ConnectionFactory::makeConnection();
 
         //Vérification si un pseudo existe deja
-        $query = 'SELECT * FROM Utilisateur WHERE `email` = ?';
+        $query = 'SELECT * FROM Utilisateur WHERE `pseudo` = ?';
         $st = $bd->prepare($query);
-        $st->bindParam(1, $email);
+        $st->bindParam(1, $pseudo);
         $st->execute();
 
 
         if ($st->rowCount() == 1) {
             throw new AuthException("Un compte existe déjà avec cet identifiant.");
         }
-        /*
-        $pseudoOK= self::checkPseudo($_POST['pseudo']);
-        $pwdOK= self::checkPasswordStrength($_POST['passe1'], 8);
-        $emailOK= self::checkEmail($_POST['email']);
-*/
-        //Si tous est valide alors on enregistre dans la base de données
-        //if ($pwdOK && $pseudoOK && $emailOK){
-        $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT, ['cost' => 12]);
-        $query = 'INSERT INTO `Utilisateur` (`email`,`pseudo`, `mdp`) VALUES (?, ?, ?)';
-        $st = $bd->prepare($query);
-        $st->bindParam(1, $email);
-        $st->bindParam(2, $_POST['pseudo']);
-        $st->bindParam(3, $passwd_hash);
 
-        $st->execute();
-        /*
+        $pseudoOK= self::checkPseudo($pseudo);
+        $pwdOK= self::checkPasswordStrength($passwd, 8);
+        $emailOK= self::checkEmail($_POST['email']);
+
+        //Si tous est valide alors on enregistre dans la base de données
+        if ($pwdOK && $pseudoOK && $emailOK){
+            $passwd_hash = password_hash($_POST['passe1'], PASSWORD_DEFAULT, ['cost' => 12]);
+            $query = 'INSERT INTO `Utilisateur` (`email`,`pseudo`, `mdp`) VALUES (?, ?, ?)';
+            $st = $bd->prepare($query);
+            $st->bindParam(1, $email);
+            $st->bindParam(2, $_POST['pseudo']);
+            $st->bindParam(3, $passwd_hash);
+
+            $st->execute();
+
         }
-            else {
-                echo '<h1> erreur </h1>';
-            }
-        */
+        else {
+            echo '<h1> erreur </h1>';
+        }
 
     }
 
@@ -112,14 +111,13 @@ class Auth {
         $lower = preg_match("#[a-z]#", $pass); // au moins une minuscule
         $upper = preg_match("#[A-Z]#", $pass); // au moins une majuscule
         */
-        if (!$length)return false;
-        return true;
+        return !$length;
     }
 
     public static function checkPseudo(string $pseudo): bool{
         //Vérification de la validité du pseudo
         $l = mb_strlen($_POST['pseudo'], 'UTF-8');
-        if ($l < 4 || $l > 32 || !mb_ereg_match('^[[:alnum:]]{1,32}$', $pseudo)){
+        if ($l < 4 || $l > 32 || !mb_ereg_match('^[[:alnum:]]{4,32}$', $pseudo)){
             return false;
         }
         return true;

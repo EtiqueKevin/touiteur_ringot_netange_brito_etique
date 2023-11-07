@@ -12,7 +12,7 @@ class ActionInscription extends Action {
         // réaffichage des données soumises en cas d'erreur, sauf les mots de passe
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             try {
-                Auth::register($_POST['passe1'],$_POST['email']);
+                Auth::register($_POST['pseudo'],$_POST['passe1']);
                 $html="<p>inscription réussie</p>";
                 $html.="<a href='?action=home'> RETOUR</a>";
             }catch(AuthException $e){
