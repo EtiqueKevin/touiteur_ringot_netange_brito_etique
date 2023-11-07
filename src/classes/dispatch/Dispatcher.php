@@ -50,13 +50,13 @@ class Dispatcher{
 
         if (isset($_SESSION['user'])) {
         $k=<<<HTML
-            <a href="?action=page-utilisateur"><button class='profil'>Profil</button></a>
-            <a href="?action=deconnexion"><button class='deconnexion'>Déconnexion</button></a>
+            <a href="?action=page-utilisateur"><button class='button'>Profil</button></a>
+            <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
 HTML;
         }else {
             $k=<<<HTML
-                <a href="?action=inscription"><button class='inscription' >Inscription</button></a>
-                <a href="?action=connexion"><button class='connexion'>Connexion</button></a>
+                <a href="?action=inscription"><button class='button' >Inscription</button></a>
+                <a href="?action=connexion"><button class='button'>Connexion</button></a>
 HTML;
              }
 

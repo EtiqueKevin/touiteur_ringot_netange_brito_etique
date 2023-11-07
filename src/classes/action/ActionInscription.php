@@ -30,8 +30,8 @@ class ActionInscription extends Action {
 
         $html.=
         '
-        <input class=input type="submit" name="btnSInscrire" value="S\'inscrire">
-        <input class=input type="reset" value="Réinitialiser">
+        <input class=button type="submit" name="btnSInscrire" value="S\'inscrire">
+        <input class=button type="reset" value="Réinitialiser">
         
         </form>
         <br><a href="./index.php?action=connexion"><button>Déjà inscrit(e), connectez-vous</button</a></div>';

@@ -20,7 +20,7 @@ class ActionConnexion extends Action{
         $html.='<label for="passe1">Votre mot de passe</label><input type="password" name="passe" id="passe" placeholder="Minimum 8 caractères"><br><br>';
 
         $html.= '
-				<input class="input" type="submit" name="btnConnexion" value="Connexion" />
+				<input class="button" type="submit" name="btnConnexion" value="Connexion" />
 		
 		</form>
 		<br>
