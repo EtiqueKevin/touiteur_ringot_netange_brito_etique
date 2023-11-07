@@ -13,7 +13,6 @@ class Touite{
 
     private $likes;
 
-    private $dislikes;
 
     private $tag;
 
@@ -24,7 +23,6 @@ class Touite{
         $this->date = $date;
         $this->auteur = $auteur;
         $this->likes = 0;
-        $this->dislikes = 0;
     }
 
     public function like(): void{
@@ -32,7 +30,7 @@ class Touite{
     }
 
     public function dislike(): void{
-        $this->dislikes++;
+        $this->likes--;
     }
 
     public function __get($property): mixed{
