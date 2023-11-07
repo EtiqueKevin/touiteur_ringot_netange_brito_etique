@@ -20,6 +20,6 @@ echo "<!DOCTYPE html>
                 <button class='connexion' href='connexion.php'>Connexion</button>
         </div>
     </nav>
-       
+    
     </body>
 </html>";
