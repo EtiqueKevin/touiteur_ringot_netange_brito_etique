@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 use touiteur\action\ActionConnexion;
 use touiteur\action\ActionInscription;
 use touiteur\dispatch\Dispatcher;
