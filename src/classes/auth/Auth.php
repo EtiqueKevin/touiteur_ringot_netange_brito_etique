@@ -4,6 +4,7 @@ namespace touiteur\auth;
 
 use PDO;
 use touiteur\DataBase\ConnectionFactory;
+use touiteur\utilisateur\Utilisateur;
 use User;
 use touiteur\auth\AuthException;
 class Auth {
@@ -78,7 +79,7 @@ class Auth {
         $st->setFetchMode(PDO::FETCH_ASSOC);
 
         $row = $st->fetch();
-        $user = new User($row['email'], $row['mdp'], $row['role']);
+        $user = new Utilisateur($row['email'], $row['mdp'], $row['role']);
         $_SESSION['user'] = serialize($user);
     }
 
