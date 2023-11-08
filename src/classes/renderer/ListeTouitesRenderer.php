@@ -12,11 +12,17 @@ class ListeTouitesRenderer{
         $this->listeTouite = $listeTouite;
     }
 
-    public function render($selector): string{
+    public function render(): string{
         $html = "<div class='liste-touite'>";
 
         foreach ($this->listeTouite->getTouitesListe() as $touite) {
-            $html .= (new TouiteRenderer($touite))->render($selector);
+            if ($touite->photo == null){
+                $html .= (new TouiteRenderer($touite))->render(1);
+            }
+            else{
+                $html .= (new TouiteRenderer($touite))->render(2);
+
+            }
         }
 
         $html .= "</div>";

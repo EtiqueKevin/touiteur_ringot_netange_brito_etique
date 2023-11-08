@@ -13,15 +13,16 @@ class Touite{
 
     private $likes;
 
-    private $tag;
+    private $photo;
 
-    public function __construct(int $id, string $texte, string $date, string $auteur)
+    public function __construct(int $id, string $texte, string $date, string $auteur, $photo  = null)
     {
         $this->id = $id;
         $this->texte = $texte;
         $this->date = $date;
         $this->auteur = $auteur;
         $this->likes = 0;
+        $this->photo = $photo;
     }
 
     public function like(): void{
