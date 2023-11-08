@@ -79,7 +79,7 @@ class Auth {
         $st->setFetchMode(PDO::FETCH_ASSOC);
 
         $row = $st->fetch();
-        $user = new Utilisateur($row['email'], $row['mdp'], $row['role']);
+        $user = new Utilisateur($row['pseudo'],$row['email'], $row['mdp'], $row['role']);
         $_SESSION['user'] = serialize($user);
     }
 
