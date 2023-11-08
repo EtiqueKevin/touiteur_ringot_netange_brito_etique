@@ -88,7 +88,7 @@ HTML.$k.<<<HTML
     </nav>
 HTML.$h.<<<HTML
     </body>
-</html>"
+</html>
 HTML;
     }
 
