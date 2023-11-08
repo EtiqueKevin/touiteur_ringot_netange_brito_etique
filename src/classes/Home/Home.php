@@ -17,7 +17,7 @@ class Home{
         foreach ($touites as $touite) {
             $nouveauTouite = null;
             if($touite['photo'] == null){
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['author']);
+                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['author'],$touite['photo']);
                 $listeTouite->addTouite($nouveauTouite);}
             else{
             $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['author'], $touite['photo']);
