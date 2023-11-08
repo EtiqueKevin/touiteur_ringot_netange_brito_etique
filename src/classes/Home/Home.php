@@ -10,17 +10,17 @@ use touiteur\touites\Touite;
 class Home{
     public static function afficherTouit(): string{
         $db = ConnectionFactory::makeConnection();
-        $statement = $db->prepare("Select * from Touite");
+        $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email order by date desc");
         $res = $statement->execute();
         $touites = $statement->fetchAll();
         $listeTouite = new ListeTouite();
         foreach ($touites as $touite) {
             $nouveauTouite = null;
-            if($touite['photo'] == null){
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['author'],$touite['photo']);
+            if($touite['img'] == null){
+                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo']);
                 $listeTouite->addTouite($nouveauTouite);}
             else{
-            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['author'], $touite['photo']);
+            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
             $listeTouite->addTouite($nouveauTouite);}
         }
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
