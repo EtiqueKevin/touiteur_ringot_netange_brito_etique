@@ -15,7 +15,8 @@ class Touite{
 
     private $photo;
 
-    public function __construct(int $id, string $texte, string $date, string $auteur, $photo  = null){
+    public function __construct(int $id, string $texte, string $date, string $auteur, $photo  = null)
+    {
         $this->id = $id;
         $this->texte = $texte;
         $this->date = $date;
@@ -41,7 +42,11 @@ class Touite{
     }
 
     public function __set($property, $value): void{
+        if ($property === 'texte' || $property === 'date' || $property === 'auteur') {
             $this->$property = $value;
+        } else {
+            throw new InvalidPropertyNameException("Property $property is not editable for a Touite.");
+        }
     }
 
 
