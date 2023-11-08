@@ -16,13 +16,9 @@ class ListeTouitesRenderer{
         $html = "<div class='liste-touite'>";
 
         foreach ($this->listeTouite->getTouitesListe() as $touite) {
-            if ($touite->photo == null){
                 $html .= (new TouiteRenderer($touite))->render(1);
-            }
-            else{
-                $html .= (new TouiteRenderer($touite))->render(2);
 
-            }
+
         }
 
         $html .= "</div>";
