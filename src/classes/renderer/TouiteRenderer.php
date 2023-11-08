@@ -19,10 +19,10 @@ class TouiteRenderer{
             case 1:
                 try {
                     $html .= '<div id="touite">
-                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->auteur.'</a> </h2><p>'.$this->touite->aff_date().'</p><br></div> 
+                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->auteur.'</a></h2><br></div> 
                 <p class="touite-content">'.$this->touite->texte.'</p><br>';
                 $html .= $this->touite->photo != null ? "image" : "";
-                $html .='</div> <a href="../index.html"><img src="../../../ressources/Heart.png"></a></p>';
+                $html .='</div> <a href="../index.html"><img src="ressources/Heart.png"></a></p>';
 
 
                 } catch (InvalidPropertyValueException $e) {
