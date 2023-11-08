@@ -42,6 +42,7 @@ class Dispatcher{
             case 'home-page':
                 $ah = new ActionHome();
                 $html = $ah->execute();
+                break;
             default:
                 $html = '<h1>Par default</h1>';
             break;
