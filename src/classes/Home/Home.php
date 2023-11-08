@@ -3,6 +3,9 @@
 namespace touiteur\Home;
 
 use touiteur\DataBase\ConnectionFactory;
+use touiteur\renderer\ListeTouitesRenderer;
+use touiteur\touites\ListeTouite;
+use touiteur\touites\Touite;
 
 class Home{
     public static function afficherTouit(): string{
