@@ -17,6 +17,7 @@ class Home{
         foreach ($touites as $touite) {
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
+            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
             $listeTouite->addTouite($nouveauTouite);}
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
@@ -48,13 +49,11 @@ class Home{
 
         foreach ($touites as $touite) {
             $nouveauTouite = null;
-            if($touite['img'] == null){
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo']);
-                $listeTouite->addTouite($nouveauTouite);}
-            else{
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
-                $listeTouite->addTouite($nouveauTouite);}
+            $img = $touite['img'] == null ? null : $touite['img'];
+            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
+            $listeTouite->addTouite($nouveauTouite);
         }
+
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render(1);
     }
