@@ -30,11 +30,12 @@ class Dispatcher{
                 $html = $ag->execute();
             break;
             case 'page-utilisateur':
-                $html = '<h1>Page utilisateur</h1>';
+                $ap = new ActionProfile();
+                $html = $ap->execute();
             break;
             case 'deconnexion':
                $ad = new ActionDeconnexion();
-                $html = $ad->execute();
+               $html = $ad->execute();
             break;
             default:
                 $html = '<h1>Par default</h1>';
