@@ -5,6 +5,7 @@ namespace touiteur\dispatch;
 use touiteur\action\ActionConnexion;
 use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionGate;
+use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
 use touiteur\action\ActionProfile;
 
