@@ -38,6 +38,9 @@ class Dispatcher{
                $ad = new ActionDeconnexion();
                $html = $ad->execute();
             break;
+            case 'home-page':
+                $ah = new ActionHome();
+                $html = $ah->execute();
             default:
                 $html = '<h1>Par default</h1>';
             break;
@@ -75,7 +78,7 @@ HTML;
     <body>
     <nav class='navbar'>
         <div id='logo' >
-            <a href="?action=default"><img src='ressources/logo_blanc.png' alt='logo' > </a>
+            <a href="?action=home-page"><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
 HTML.$k.<<<HTML
