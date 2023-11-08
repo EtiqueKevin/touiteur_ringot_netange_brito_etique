@@ -15,13 +15,8 @@ class Home{
         $touites = $statement->fetchAll();
         $listeTouite = new ListeTouite();
         foreach ($touites as $touite) {
-            $nouveauTouite = null;
-            if($touite['img'] == null){
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo']);
-                $listeTouite->addTouite($nouveauTouite);}
-            else{
             $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
-            $listeTouite->addTouite($nouveauTouite);}
+            $listeTouite->addTouite($nouveauTouite);
         }
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render(1);
