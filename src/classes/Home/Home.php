@@ -42,7 +42,7 @@ class Home{
         $row2 = $st2->fetch();
         $idRes = implode(',', $row2);
 
-        $statement = $db->prepare("Select * from Touite where id IN ? OR author IN ? order by date desc");
+        $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email where id IN ? OR author IN ? order by date desc");
         $statement->bindParam(1, $idRes);
         $statement->bindParam(2, $emailRes);
         $statement->execute();
