@@ -12,7 +12,7 @@ class Utilisateur{
     private string $photo;
     private string $bio;
 
-    public function __construct(string $pseudo, string $email, string $mdp, string $photo ="ressources/z.png", string $bio="Exprimez-vous"){
+    public function __construct(string $pseudo, string $email, string $mdp, string $photo ="ressources/Z.png", string $bio="Exprimez-vous"){
         $this->pseudo = $pseudo;
         $this->email = $email;
         $this->mdp = $mdp;

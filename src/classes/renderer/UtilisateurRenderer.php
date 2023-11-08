@@ -17,17 +17,20 @@ class UtilisateurRenderer{
         switch ($selector) {
             case 1:
                 try {
-                    $html .= '<div class="utilisateur-head">
-                <h2 class="utilisateur-pseudo">'.$this->user->__get('pseudo').'</h2><br></div>';
+                    $pdp = $this->user->__get('photo');
+                    $html .= '<div class="profil-head">
+                <img class="profil-pdp" src='.$pdp.' alt="pdp"><br>
+                <h2 class="profil-pseudo">'.$this->user->__get('pseudo').'</h2><br>
+                
+                <p class="profil-bio">'.$this->user->__get('bio').'</p><br>
+                </div>';
                 }
                 catch (InvalidPropertyValueException $e){
                     echo "prob";
                 }
                 break;
         }
-            
-            
-            
+
        return $html;     
     }   
     
