@@ -20,7 +20,7 @@ class TouiteRenderer{
                 try {
                     $html .= '<div class="touite-head">
                 <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->__get('auteur').'</a> </h2><p>'.$this->touite->aff_date().'</p><br></div> 
-                <p class="touite-content">'.$this->touite->__get('auteur').'</p><br>
+                <p class="touite-content">'.$this->touite->texte.'</p><br>
                 <p><a href="../index.html">Répondre</a> <a href="../index.html">like</a></p>
                 ';
                 } catch (InvalidPropertyValueException $e) {
