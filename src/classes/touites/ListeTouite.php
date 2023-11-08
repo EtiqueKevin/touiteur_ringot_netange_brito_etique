@@ -14,8 +14,8 @@ class ListeTouite{
         array_push($this->listeTouite, $touite);
     }
 
-    public function addPlusieursTouites(ListeTouite $listeTouite){
-        foreach($listeTouite->getTouites() as $touite){
+    public function addPlusieursTouites($t = array()){
+        foreach($t as $touite){
             $this->addTouite($touite);
         }
     }

@@ -25,10 +25,10 @@ class ActionConnexion extends Action{
                 $html = '<div id="auth"> 
                 <h1>Connexion</h1> 
                 <form method="post">';
-                $html .= '<label for="pseudo">Votre pseudo</label><input type="text" name="pseudo" id="pseudo" placeholder="Minimum 4 caractères"><br>';
+                $html .= '<label for="email">Votre email</label><input type="text" name="email" id="email" placeholder="email"><br>';
                 $html .= '<label for="passe1">Votre mot de passe</label><input type="password" name="passe" id="passe" placeholder="Minimum 8 caractères"><br><br>';
                 $html .= '
-				<input class="button" type="submit" name="btnConnexion" value="Connexion" />
+				<input class="button" type="submit" value="Connexion" />
 		
 		</form>
 		<br>
