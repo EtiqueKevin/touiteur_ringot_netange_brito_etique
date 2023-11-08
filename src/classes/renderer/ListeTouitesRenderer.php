@@ -17,8 +17,6 @@ class ListeTouitesRenderer{
 
         foreach ($this->listeTouite->getTouitesListe() as $touite) {
                 $html .= (new TouiteRenderer($touite))->render(1);
-
-
         }
 
         $html .= "</div>";

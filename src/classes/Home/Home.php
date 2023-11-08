@@ -21,7 +21,7 @@ class Home{
             $listeTouite->addTouite($nouveauTouite);}
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
-        return $listeTouiteRenderer->render(1);
+        return $listeTouiteRenderer->render();
     }
 
     public static function afficherTouitesSuivie(): string{
@@ -55,6 +55,6 @@ class Home{
         }
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
-        return $listeTouiteRenderer->render(1);
+        return $listeTouiteRenderer->render();
     }
 }
