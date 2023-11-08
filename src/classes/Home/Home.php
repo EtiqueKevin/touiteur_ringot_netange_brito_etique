@@ -19,6 +19,6 @@ class Home{
             $listeTouite->addTouite($nouveauTouite);
         }
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
-        return $listeTouiteRenderer->render(1);
+        return $listeTouiteRenderer->render();
     }
 }
