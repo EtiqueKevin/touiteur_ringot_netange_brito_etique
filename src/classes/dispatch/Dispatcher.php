@@ -6,6 +6,7 @@ use touiteur\action\ActionConnexion;
 use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionGate;
 use touiteur\action\ActionInscription;
+use touiteur\action\ActionProfile;
 
 require_once 'vendor/autoload.php';
 require_once 'src/classes/action/lib_touiteur.php';
