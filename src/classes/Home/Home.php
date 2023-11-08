@@ -16,13 +16,9 @@ class Home{
         $listeTouite = new ListeTouite();
         foreach ($touites as $touite) {
             $nouveauTouite = null;
-            if($touite['img'] == null){
-                $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo']);
-                $listeTouite->addTouite($nouveauTouite);}
-            else{
-            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
+            $img = $touite['img'] == null ? null : $touite['img'];
             $listeTouite->addTouite($nouveauTouite);}
-        }
+
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render(1);
     }

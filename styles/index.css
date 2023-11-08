@@ -69,7 +69,7 @@ nav #logo img:hover {
 }
 
 a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
 }
 
@@ -103,5 +103,47 @@ a {
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
+  text-align: left;
+}
+
+#like {
+  background-color: #86da85;
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 15px;
+    padding: 5px;
+  text-align: right;
+}
+/* changer l'image de l'objet img dans la navbar*/
+#like:hover {
+  background-color: #c468a8;
+  filter: invert(100%);
+}
+
+#block-touite {
+  max-width: 600px;
+  max-height: 320px;
+    padding: 20px;
+  /* center the touites */
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right;
+}
+
+.touite-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  /* allez à la ligne */
+    overflow-wrap: break-word;
+  /* tronquer le texte sur la première ligne */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* supprimer les espaces blancs après le texte tronqué */
+  overflow: hidden;
+  /* définir la largeur maximale de la boîte */
+  width: 200px;
+  /* tronquer le texte sur la première ligne, même si la boîte est assez grande */
+  overflow-x: hidden;
 }

@@ -18,11 +18,13 @@ class TouiteRenderer{
         switch ($selector){
             case 1:
                 try {
-                    $html .= '<div id="touite">
-                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->auteur.'</a></h2><br></div> 
+                    $html .= '<div id="block-touite">
+                <div id="touite">
+                <div id="touite-head">
+                <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->auteur.'</a></h2><br></div>
                 <p class="touite-content">'.$this->touite->texte.'</p><br>';
-                $html .= $this->touite->photo != null ? "image" : "";
-                $html .='</div> <a href="../index.html"><img src="ressources/Heart.png"></a></p>';
+                $html .= $this->touite->photo != null ? "image..." : "";
+                $html .='</div> <a href="../index.html"><img id="like" src="ressources/Heart.png"></a></p></div>';
 
 
                 } catch (InvalidPropertyValueException $e) {
