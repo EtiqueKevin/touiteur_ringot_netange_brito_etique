@@ -8,6 +8,7 @@ use touiteur\action\ActionDiscover;
 use touiteur\action\ActionGate;
 use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
+use touiteur\action\ActionLike;
 use touiteur\action\ActionProfile;
 
 
@@ -50,6 +51,10 @@ class Dispatcher{
                 $d = new ActionDiscover();
                 $html = $d->execute();
                 $_SESSION['position'] = 'discover';
+                break;
+            case 'like':
+                $l = new ActionLike();
+                $html = $l->execute();
                 break;
             default:
                 $html = '<h1>Par default</h1>';
