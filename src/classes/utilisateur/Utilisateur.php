@@ -2,6 +2,7 @@
 
 namespace touiteur\utilisateur;
 
+use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyValueException;
 
 class Utilisateur{
@@ -36,6 +37,19 @@ class Utilisateur{
         } else {
             throw new InvalidPropertyValueException("Property $property is not editable for a Utilisateur.");
         }
+    }
+    public static function hasLiked($email, $idTouite): bool{
+        $booleen = true;
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT * FROM HasLiked WHERE email = ? AND idTouite = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $email);
+        $st->bindParam(2, $idTouite);
+        $st->execute();
+        if($st->fetchAll() === false){
+            $booleen = false;
+        }
+        return $booleen;
     }
 
 
