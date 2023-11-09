@@ -10,20 +10,20 @@ class ActionLike extends Action
     {
         $html = '';
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if (!isset($_SESSION['user'])) {
-                $user = unserialize($_SESSION['user']);
+            if (isset($_SESSION['user'])) {
+                $user = unserialize($_SESSION['user'])->email;
                 $id = $_GET['id'];
                 $bd = ConnectionFactory::makeConnection();
                 $sql = "SELECT * FROM HasLiked where email = ? and idTouite = ?";
                 $st = $bd->prepare($sql);
-                $st->bindParam(1, $user->email);
+                $st->bindParam(1, $user);
                 $st->bindParam(2, $id);
                 $st->execute();
                 $result = $st->fetch();
                 if (!$result) {
                     $sql = "INSERT INTO HasLiked (email, idTouite) VALUES (?, ?)";
                     $st = $bd->prepare($sql);
-                    $st->bindParam(1, $user->email);
+                    $st->bindParam(1, $user);
                     $st->bindParam(2, $id);
                     $st->execute();
                     $sql = "UPDATE Touite SET likes = likes + 1 WHERE id = ?";
@@ -31,7 +31,7 @@ class ActionLike extends Action
                 } else {
                     $sql = "DELETE FROM HasLiked WHERE email = ? and idTouite = ?";
                     $st = $bd->prepare($sql);
-                    $st->bindParam(1, $user->email);
+                    $st->bindParam(1, $user);
                     $st->bindParam(2, $id);
                     $st->execute();
                     $sql = "UPDATE Touite SET likes = likes - 1 WHERE id = ?";
