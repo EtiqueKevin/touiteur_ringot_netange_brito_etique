@@ -145,5 +145,4 @@ a {
   /* définir la largeur maximale de la boîte */
   width: 200px;
   /* tronquer le texte sur la première ligne, même si la boîte est assez grande */
-  overflow-x: hidden;
 }
