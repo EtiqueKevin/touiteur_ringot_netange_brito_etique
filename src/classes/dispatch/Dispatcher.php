@@ -3,6 +3,7 @@
 namespace touiteur\dispatch;
 
 use touiteur\action\ActionConnexion;
+use touiteur\action\ActionCreerTouite;
 use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionDiscover;
 use touiteur\action\ActionGate;
@@ -38,6 +39,10 @@ class Dispatcher{
                 $html = $ap->execute();
                 $_SESSION['position'] = 'profile';
             break;
+            case 'publier-touite':
+                $ap = new ActionCreerTouite();
+                $html = $ap->execute();
+            break;
             case 'deconnexion':
                $ad = new ActionDeconnexion();
                $html = $ad->execute();
@@ -71,8 +76,10 @@ class Dispatcher{
         if (isset($_SESSION['user'])) {
         $k=<<<HTML
             <a href="?action=discover"><button class="button">Discover</button></a>
+            <a href="?action=publier-touite"><button class="button"><strong>+</strong></button></a>
             <a href="?action=page-utilisateur"><button class='button'>Profil</button></a>
             <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
+
 HTML;
         }else {
             $k=<<<HTML
