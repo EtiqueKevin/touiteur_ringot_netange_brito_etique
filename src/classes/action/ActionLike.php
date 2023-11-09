@@ -52,8 +52,8 @@ class ActionLike extends Action
             }
 
             else{
-                $ac = new ActionConnexion();
-                $html = $ac->execute();
+                $html = '<h1>Vous devez être connecté pour pouvoir liker un touite</h1>';
+                $html.= '<a href="index.php?action=gate">RETOUR</a>';
             }
         }
         return $html;
