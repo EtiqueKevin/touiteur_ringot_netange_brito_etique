@@ -10,9 +10,8 @@ class ActionLike extends Action
     {
         $html = '';
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $user = unserialize($_SESSION['user']);
-            $user->email;
             if (!isset($_SESSION['user'])) {
+                $user = unserialize($_SESSION['user']);
                 $id = $_GET['id'];
                 $bd = ConnectionFactory::makeConnection();
                 $sql = "SELECT * FROM HasLiked where email = ? and idTouite = ?";
@@ -27,7 +26,7 @@ class ActionLike extends Action
                     $st->bindParam(1, $user->email);
                     $st->bindParam(2, $id);
                     $st->execute();
-                    $sql = "UPDATE touites SET likes = likes + 1 WHERE id = ?";
+                    $sql = "UPDATE Touite SET likes = likes + 1 WHERE id = ?";
 
                 } else {
                     $sql = "DELETE FROM HasLiked WHERE email = ? and idTouite = ?";
@@ -35,7 +34,7 @@ class ActionLike extends Action
                     $st->bindParam(1, $user->email);
                     $st->bindParam(2, $id);
                     $st->execute();
-                    $sql = "UPDATE touites SET likes = likes - 1 WHERE id = ?";
+                    $sql = "UPDATE Touite SET likes = likes - 1 WHERE id = ?";
                 }
                 $st = $bd->prepare($sql);
                 $st->bindParam(1, $id);
