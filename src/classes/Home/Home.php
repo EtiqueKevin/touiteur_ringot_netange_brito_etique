@@ -49,4 +49,20 @@ class Home{
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();
     }
+    public static function afficherTouitEmail($email): string{
+        $db = ConnectionFactory::makeConnection();
+        $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email where email = ? order by date desc");
+        $statement->bindParam(1, $email);
+        $res = $statement->execute();
+        $touites = $statement->fetchAll();
+        $listeTouite = new ListeTouite();
+        foreach ($touites as $touite) {
+            $nouveauTouite = null;
+            $img = $touite['img'] == null ? null : $touite['img'];
+            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
+            $listeTouite->addTouite($nouveauTouite);}
+
+        $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
+        return $listeTouiteRenderer->render();
+    }
 }

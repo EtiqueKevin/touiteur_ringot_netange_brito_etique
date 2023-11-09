@@ -146,3 +146,67 @@ a {
   width: 200px;
   /* tronquer le texte sur la première ligne, même si la boîte est assez grande */
 }
+
+#profil-page {
+    background-color: #dcffd9;
+    color: #000;
+        padding: 20px;
+    /* center the touites */
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+#profil-top{
+  padding: 10px 20px;
+  display: flex;
+  clear: both;
+  justify-content: space-between;
+}
+
+
+#profil-head {
+  max-height: 100px;
+  max-width: 600px;
+  text-align: left;
+  /* afficher en ligne */
+  display: flex;
+  flex-direction: row;
+}
+
+.profil-pdp {
+  width: 100px;
+  height: auto;
+  display: block;
+  border-radius: 50%;
+}
+
+.profil-pseudo {
+  margin-left: 20px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#follow-profil {
+    color: #ffffff;
+    background-color: #3a8646;
+  max-height: 100px;
+  max-width: 170px;
+  text-align: left;
+  /* afficher en ligne */
+  display: flex;
+  flex-direction: row;
+    border-radius: 15px;
+  padding: 20px;
+  align-items: center;
+}
+
+#follow-profil .button {
+    margin-left: 20px;
+    display: block;
+}
+.number-follow {
+  margin-left: 20px;
+  font-size: 12px;
+}
