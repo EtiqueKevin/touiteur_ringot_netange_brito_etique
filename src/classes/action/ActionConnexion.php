@@ -15,10 +15,10 @@ class ActionConnexion extends Action{
                 Auth::authenticate($_POST['email'], $_POST['passe']);
                 Auth::loadProfile($_POST['email']);
                 $html = "<p>Connexion réussie</p>";
-                $html .= "<a href='?action=home'> RETOUR</a>";
+                $html .= "<a href='?action=home-page'>RETOUR</a>";
             } catch (AuthException $e) {
-                $html = "<p> ERROR</p>";
-                $html .= "<a href='?action=gate'> RETOUR</a>";
+                $html = "<p> Connexion échoué</p>";
+                $html .= "<a href='?action=gate'>Ressayer</a>";
             }
         }
         else{
