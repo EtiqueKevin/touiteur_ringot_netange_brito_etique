@@ -2,6 +2,7 @@
 
 namespace touiteur\action;
 
+use PDO;
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\Home\HomeTouite;
 
@@ -64,7 +65,7 @@ class ActionCreerTouite extends Action{
                 if(!in_array($tg, $row)){
                     $query = 'INSERT INTO `Tag` (`tag`) VALUES (?)';
                     $st = $bd->prepare($query);
-                    $st->bindParam(1, $tag);
+                    $st->bindParam(1, $tg);
                     $st->execute();
                 }
                 $query = 'INSERT INTO `TouiteTag` (`idTouite`, `idTag`) VALUES (?, (SELECT `idTag` FROM `Tag` WHERE `tag` = ?))';
