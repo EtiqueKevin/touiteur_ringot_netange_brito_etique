@@ -35,6 +35,7 @@ class Dispatcher{
             case 'page-utilisateur':
                 $ap = new ActionProfile();
                 $html = $ap->execute();
+                $_SESSION['position'] = 'profile';
             break;
             case 'deconnexion':
                $ad = new ActionDeconnexion();
@@ -43,10 +44,12 @@ class Dispatcher{
             case 'home-page':
                 $ah = new ActionHome();
                 $html = $ah->execute();
+                $_SESSION['position'] = 'home';
                 break;
             case 'discover':
                 $d = new ActionDiscover();
                 $html = $d->execute();
+                $_SESSION['position'] = 'discover';
                 break;
             default:
                 $html = '<h1>Par default</h1>';
