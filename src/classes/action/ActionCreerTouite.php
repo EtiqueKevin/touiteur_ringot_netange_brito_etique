@@ -2,46 +2,86 @@
 
 namespace touiteur\action;
 
-class ActionCreerTouite
-{
-    function formulaire_touite(): string
-    {
-        $html = "";
-        $html .= '<form action="test.php" method="POST">
-            <textarea name="txtMessage"></textarea>
-            <input type="submit" value="Publier" title="Publier mon message">
-            <label for="avatar">Ajouter une photo: </label><input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" /><br>
-            </form>';
+use touiteur\DataBase\ConnectionFactory;
+use touiteur\Home\HomeTouite;
+
+class ActionCreerTouite extends Action{
+
+    public function execute(): string{
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $text = filter_var($_POST['txtMessage'], FILTER_SANITIZE_STRING);
+            //
+            if (!empty($_FILES['img']['name'])){
+                $fileSource = $_FILES['img']['name'];
+                $fileDestination = 'ressources/' . $fileSource;
+                //
+                $fileType = $_FILES['img']['type'];
+                if ($fileType === 'image/png' || $fileType === 'image/jpeg' || $fileType === 'image/jpg' || $fileType === 'image/gif') {
+                    move_uploaded_file($_FILES['img']['tmp_name'], $fileDestination);
+                }
+                else{
+                    return "Le fichier n'est pas une image";
+                }
+            }
+            else{
+                $fileDestination = null;
+            }
+
+
+
+            $d = date('Y-m-d H:i:s');
+            $mail = unserialize($_SESSION['user'])->email;
+
+
+
+            $bd = ConnectionFactory::makeConnection();
+
+            $query = 'SELECT `MAX(id)` FROM `Touite`';
+            $st = $bd->prepare($query);
+            $st->execute();
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $st->fetch();
+            $idT = $row['MAX(id)'] + 1;
+
+            $query = 'INSERT INTO `Touite` (`id`,text`, `date`, `author`,`img`) VALUES (?, ?, ?, ?, ?)';
+            $stt = $bd->prepare($query);
+            $stt->bindParam(1, $idT);
+            $stt->bindParam(2, $text);
+            $stt->bindParam(3, $d);
+            $stt->bindParam(4, $mail);
+            $stt->bindParam(5, $fileDestination);
+            $stt->execute();
+
+            $query = 'SELECT tag FROM `Tag`';
+            $st = $bd->prepare($query);
+            $st->execute();
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $st->fetch();
+
+
+            $tab = HomeTouite::recup_tag($text);
+            foreach ($tab as $tg){
+                if(!in_array($tg, $row)){
+                    $query = 'INSERT INTO `Tag` (`tag`) VALUES (?)';
+                    $st = $bd->prepare($query);
+                    $st->bindParam(1, $tag);
+                    $st->execute();
+                }
+                $query = 'INSERT INTO `TouiteTag` (`idTouite`, `idTag`) VALUES (?, (SELECT `idTag` FROM `Tag` WHERE `tag` = ?))';
+                $st = $bd->prepare($query);
+                $st->bindParam(1, $idT);
+                $st->bindParam(2, $tg);
+                $st->execute();
+            }
+
+            $html = "Touite publié";
+            $html .= "<a href='?action=home-page'>Retour</a>";
+        }
+        else{
+            $html = HomeTouite::formulaire_touite();
+        }
         return $html;
-    }
-
-    /**
-     * Récupère toutes les tags d'un touite
-     *
-     * @param string $text texte du touite
-     * @return array Tableau contenant les tags
-     */
-    function recup_tag(string $text): array
-    {
-        preg_match_all('/#([a-zA-Z0-9éâîôùèçàïû]+)/', $text, $matches, PREG_SET_ORDER);
-        return array_column($matches, 1);
-    }
-
-    /**
-     * Ajoute les liens vers les tags dans le texte
-     *
-     * @param string $cuit texte du blaba
-     * @return string Texte du blaba avec les liens
-     */
-    function active_tag(string $touite): string
-    {
-        return preg_replace_callback('/(?<=([^&])|^)#([a-zA-Z0-9éâîôùèçàïû]+)/',
-            function ($matches) {
-                return '<a id="tag" href="?tag=' . urlencode($matches[2]) . '">#' . $matches[2] . '</a>';
-            },
-            $touite
-        );
 
     }
-
 }
