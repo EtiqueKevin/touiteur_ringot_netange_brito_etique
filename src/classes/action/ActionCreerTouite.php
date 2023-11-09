@@ -57,12 +57,20 @@ class ActionCreerTouite extends Action{
             $st = $bd->prepare($query);
             $st->execute();
             $st->setFetchMode(PDO::FETCH_ASSOC);
-            $row = $st->fetch();
+            $row = $st->fetchAll();
 
 
             $tab = HomeTouite::recup_tag($text);
             foreach ($tab as $tg){
-                if(!in_array($tg, $row)){
+
+                $q = 'SELECT * FROM `Tag` WHERE `tag` = ?';
+                $s = $bd->prepare($q);
+                $s->bindParam(1, $tg);
+                $s->execute();
+                $s->setFetchMode(PDO::FETCH_ASSOC);
+                $rowCount = $s->rowCount();
+
+                if($rowCount == 0){
                     $query = 'INSERT INTO `Tag` (`tag`) VALUES (?)';
                     $st = $bd->prepare($query);
                     $st->bindParam(1, $tg);
