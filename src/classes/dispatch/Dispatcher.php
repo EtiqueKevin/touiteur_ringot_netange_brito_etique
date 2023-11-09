@@ -10,7 +10,6 @@ use touiteur\action\ActionInscription;
 use touiteur\action\ActionProfile;
 
 require_once 'vendor/autoload.php';
-require_once 'src/classes/action/lib_touiteur.php';
 
 class Dispatcher{
     public function run(): void{
