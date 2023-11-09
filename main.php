@@ -9,7 +9,6 @@ use touiteur\utilisateur\Utilisateur;
 use touiteur\renderer\UtilisateurRenderer;
 
 require_once 'vendor/autoload.php';
-require_once 'src/classes/action/lib_touiteur.php';
 
 $u1 = new Utilisateur("toto", "toto@mail.com", 1234);
 
