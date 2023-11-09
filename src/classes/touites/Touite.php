@@ -2,6 +2,7 @@
 
 namespace touiteur\touites;
 
+use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyNameException;
 use touiteur\exception\InvalidPropertyValueException;
 
@@ -25,8 +26,14 @@ class Touite{
         $this->photo = $photo;
     }
 
-    public function like(): void{
-        $this->likes++;
+    public static function like($id){
+            $id = $_GET['id'];
+            $bd = ConnectionFactory::makeConnection();
+            $sql = "UPDATE touites SET likes = likes + 1 WHERE id = ?";
+            $st = $bd->prepare($sql);
+            $st->bindParam(1, $id);
+            $st->execute();
+
     }
 
     public function dislike(): void{
