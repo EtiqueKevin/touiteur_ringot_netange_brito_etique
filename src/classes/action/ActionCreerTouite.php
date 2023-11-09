@@ -44,13 +44,12 @@ class ActionCreerTouite extends Action{
             $row = $st->fetch();
             $idT = $row['MAX(id)'] + 1;
 
-            $query = 'INSERT INTO `Touite` (`id`,text`, `date`, `author`,`img`) VALUES (?, ?, ?, ?, ?)';
+            $query = 'INSERT INTO `Touite` (`text`, `date`, `author`,`img`) VALUES (?, ?, ?, ?)';
             $stt = $bd->prepare($query);
-            $stt->bindParam(1, $idT);
-            $stt->bindParam(2, $text);
-            $stt->bindParam(3, $d);
-            $stt->bindParam(4, $mail);
-            $stt->bindParam(5, $fileDestination);
+            $stt->bindParam(1, $text);
+            $stt->bindParam(2, $d);
+            $stt->bindParam(3, $mail);
+            $stt->bindParam(4, $fileDestination);
             $stt->execute();
 
             $query = 'SELECT tag FROM `Tag`';
