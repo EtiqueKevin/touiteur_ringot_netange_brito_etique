@@ -59,10 +59,16 @@ class Utilisateur{
         $st->execute();
         $result = $st->fetch();
         return $result['count(*)'];
+    }
 
-
-
-
+    public static function hasFollow($emailFollower, $emailFollowed): bool{
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT * FROM FollowUser WHERE emailFollower = ? AND emailFollowed = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $emailFollower);
+        $st->bindParam(2, $emailFollowed);
+        $st->execute();
+        return $st->fetch() !==  false;
     }
 
 
