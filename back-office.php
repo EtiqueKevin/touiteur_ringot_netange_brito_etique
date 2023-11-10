@@ -25,12 +25,15 @@ switch ($action) {
             $st->bindParam(1, $email);
             $st->execute();
 
-            $user = $st->fetchColumn();
+            $user = $st->fetch();
             try {
-                if ($user === false and $user['role'] != 100) {
+                if (!$user) {
                     throw new Exception("erreur connexion");
                 }
-                if (!password_verify($passwd, $user)) {
+                if ($user['role'] != 100) {
+                    throw new Exception("erreur connexion");
+                }
+                if (!password_verify($passwd, $user['mdp'])) {
                     throw new Exception("erreur connexion");
                 } else {
 
@@ -107,7 +110,7 @@ echo <<<HTML
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='styles/index.css'>
+    <link rel='stylesheet' href='styles/back-office.css'>
 <title>Touiteur</title>
 </head>
 
