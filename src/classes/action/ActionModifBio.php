@@ -25,11 +25,14 @@ class ActionModifBio extends Action{
         else{
             $html =<<<HTML
             <div>
-            <h1>Modifier votre bio</h1>
+            
             <form method="post">
+                <div id="form-edit">
+                <h1>Modifier votre bio</h1>
                 <label for="bio">Bio</label>
-                <input type="text" name="bio" id="bio" required maxlength="255" ><br><br>
+                <textarea name="bio" id="bio" required maxlength="255" ></textarea><br><br>
                 <input type="submit" value="Envoyer">
+                </div>
             </div>
 HTML;
 

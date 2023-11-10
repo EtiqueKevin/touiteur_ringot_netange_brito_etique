@@ -13,6 +13,8 @@ use touiteur\action\ActionGate;
 use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
 use touiteur\action\ActionLike;
+use touiteur\action\ActionModifBio;
+use touiteur\action\ActionModifPP;
 use touiteur\action\ActionProfile;
 use touiteur\action\ActionTag;
 use touiteur\action\ActionUtilisateur;
@@ -86,6 +88,14 @@ class Dispatcher
                 break;
             case 'followTag':
                 $f = new ActionFollowTag();
+                $html = $f->execute();
+                break;
+            case 'edit-bio':
+                $f = new ActionModifBio();
+                $html = $f->execute();
+                break;
+            case 'edit-pdp':
+                $f = new ActionModifPP();
                 $html = $f->execute();
                 break;
             default:

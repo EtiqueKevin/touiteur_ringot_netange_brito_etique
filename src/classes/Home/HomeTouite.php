@@ -10,10 +10,10 @@ class HomeTouite
     public static function formulaire_touite(): string
     {
         $html = '<form method="post" enctype="multipart/form-data">
-            <textarea name="txtMessage"></textarea>
-            <label for="img">Ajouter une photo: </label>
-            <input type="file" id="img" name="img" accept="image/png, image/jpeg" /><br>
-            <input type="submit" value="Publier" title="Publier mon message">
+            <div id="new-touite">
+            <textarea name="txtMessage"></textarea><br>
+            <label for="img">Ajouter une photo: </label><input type="file" id="img" name="img" accept="image/png, image/jpeg" /><br>
+            <input type="submit" value="Publier" title="Publier mon message"></div>
             </form>';
         return $html;
     }

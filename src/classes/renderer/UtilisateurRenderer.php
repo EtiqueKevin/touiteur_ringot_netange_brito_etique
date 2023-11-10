@@ -18,21 +18,21 @@ class UtilisateurRenderer
     public function render(int $selector): string
     {
         $userLog = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
-        $selector = $this->user->email === $userLog ? 1 : $selector;
+        $selector = $this->user->email === $userLog->email ? 3 : $selector;
 
         $html = '<div class="utilisateur">';
         $follow = Utilisateur::getFollower($this->user->email);
         $pdp = $this->user->__get('photo');
-        $html .= '<div id="profil-page">
+
+        switch ($selector) {
+            case 1:
+                try {
+                    $html .= '<div id="profil-page">
                    <div id="profil-top">
                   <div id="profil-head">
                 <img class="profil-pdp" src=' . $pdp . ' alt="pdp"><p class="profil-pseudo">' . $this->user->__get('pseudo') . '</p></div><br>
                 <div id="follow-profil">
-                <p class="number-follow">' . $follow . ' Followers</p>';
-        switch ($selector) {
-            case 1:
-                try {
-                    $html .= '
+                <p class="number-follow">' . $follow . ' Followers</p>
                  </div></div>
                 ';
 
@@ -42,6 +42,12 @@ class UtilisateurRenderer
                 break;
             case 2:
                 try {
+                    $html .= '<div id="profil-page">
+                   <div id="profil-top">
+                  <div id="profil-head">
+                <img class="profil-pdp" src=' . $pdp . ' alt="pdp"><p class="profil-pseudo">' . $this->user->__get('pseudo') . '</p></div><br>
+                <div id="follow-profil">
+                <p class="number-follow">' . $follow . ' Followers</p>';
                     $user = unserialize($_SESSION['user']);
                     $html .= Utilisateur::hasFollow($user->email, $this->user->email) ? '
                  <a href="?action=follow&email=' . $this->user->email . '"><p class="button">Unfollow</p></a></div></div>
@@ -51,6 +57,21 @@ class UtilisateurRenderer
                     echo "prob";
                 }
                 break;
+            case 3 :{
+                $html .= '<div id="profil-page">
+                   <div id="profil-top">
+                  <div id="profil-head">
+                <img class="profil-pdp" src=' . $pdp . ' alt="pdp"><p class="profil-pseudo">' . $this->user->__get('pseudo') . '</p></div><br>
+                <div id="follow-profil">
+                <p class="number-follow">' . $follow . ' Followers</p>
+                 </div></div>
+                 <div id="edit-profil">
+                 <a href="?action=edit-pdp"><button class="button">Changer de pdp</button></a>
+                 <a href="?action=edit-bio"><button class="button">Changer de bio</button></a>
+</div>
+                ';
+
+            }
         }
         $html .= '<p class="profil-bio">' . $this->user->__get('bio') . '</p><br>
                 </div>';
