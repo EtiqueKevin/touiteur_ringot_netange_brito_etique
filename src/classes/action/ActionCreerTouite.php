@@ -13,21 +13,7 @@ class ActionCreerTouite extends Action{
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $text = filter_var($_POST['txtMessage'], FILTER_SANITIZE_STRING);
             //
-            if (!empty($_FILES['img']['name'])){
-                $fileSource = $_FILES['img']['name'];
-                $fileDestination = 'ressources/' . $fileSource;
-                //
-                $fileType = $_FILES['img']['type'];
-                if ($fileType === 'image/png' || $fileType === 'image/jpeg' || $fileType === 'image/jpg' || $fileType === 'image/gif') {
-                    move_uploaded_file($_FILES['img']['tmp_name'], $fileDestination);
-                }
-                else{
-                    return "Le fichier n'est pas une image";
-                }
-            }
-            else{
-                $fileDestination = null;
-            }
+
 
 
 
@@ -44,6 +30,41 @@ class ActionCreerTouite extends Action{
             $st->setFetchMode(PDO::FETCH_ASSOC);
             $row = $st->fetch();
             $idT = $row['MAX(id)'] + 1;
+
+
+            if (!empty($_FILES['img']['name'])){
+                $fileDestination = 'ressources/' . $idT;
+                //
+                $fileType = $_FILES['img']['type'];
+                if ($fileType === 'image/png' || $fileType === 'image/jpeg' || $fileType === 'image/jpg' || $fileType === 'image/gif') {
+                    switch ($fileType) {
+                        case 'image/png':
+                            $fileDestination .='.png';
+                        break;
+                        case 'image/jpeg':
+                            $fileDestination .='.jpeg';
+                        break;
+                        case 'image/jpg':
+                            $fileDestination .='.jpg';
+                        break;
+                        case 'image/gif':
+                            $fileDestination .='.gif';
+                        break;
+                        default:
+                            $fileDestination .='.png';
+                        break;
+
+                        move_uploaded_file($_FILES['img']['tmp_name'], $fileDestination);
+                    }
+
+                }
+                else{
+                    $fileDestination = null;
+                }
+            }
+            else{
+                $fileDestination = null;
+            }
 
             $query = 'INSERT INTO `Touite` (`text`, `date`, `author`,`img`) VALUES (?, ?, ?, ?)';
             $stt = $bd->prepare($query);
