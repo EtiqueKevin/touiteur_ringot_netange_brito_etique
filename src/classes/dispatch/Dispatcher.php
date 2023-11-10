@@ -11,6 +11,7 @@ use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
 use touiteur\action\ActionLike;
 use touiteur\action\ActionProfile;
+use touiteur\action\ActionFollow;
 
 
 require_once 'vendor/autoload.php';
