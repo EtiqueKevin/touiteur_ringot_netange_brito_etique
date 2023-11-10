@@ -9,7 +9,12 @@ use touiteur\touites\Touite;
 
 class Home{
 
-    //Permet d'afficher tous les touites
+
+    /**
+     *Permet d'afficher tous les touites
+     *
+     * @return string
+     */
     public static function afficherTouit(): string{
 
         $db = ConnectionFactory::makeConnection();
@@ -31,7 +36,13 @@ class Home{
         return $listeTouiteRenderer->render();
     }
 
-    //Permet d'afficher les touites suivis par l'utilisateur (tag et utilisateur suivis)
+
+
+    /**
+     * Permet d'afficher les touites suivis par l'utilisateur (tag et utilisateur suivis)
+     *
+     * @return string
+     */
     public static function afficherTouitesSuivie(): string{
         $db = ConnectionFactory::makeConnection();
 
@@ -58,7 +69,14 @@ class Home{
         return $listeTouiteRenderer->render();
     }
 
-    //Permet d'afficher les touites d'un utilisateur
+
+
+    /**
+     *Permet d'afficher les touites d'un utilisateur
+     *
+     * @param $email
+     * @return string
+     */
     public static function afficherTouitEmail($email): string{
 
         $db = ConnectionFactory::makeConnection();
@@ -79,7 +97,14 @@ class Home{
         return $listeTouiteRenderer->render();
     }
 
-    //Permet d'afficher les touites d'un tag
+
+
+    /**
+     * Permet d'afficher les touites d'un tag
+     *
+     * @param $tag
+     * @return string
+     */
     public static function afficherTouitTag($tag): string{
 
         $db = ConnectionFactory::makeConnection();

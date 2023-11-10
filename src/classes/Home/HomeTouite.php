@@ -7,6 +7,11 @@ use touiteur\DataBase\ConnectionFactory;
 class HomeTouite
 {
 
+    /**
+     * Renvoie le formulaire pour publier un touite
+     *
+     * @return string
+     */
     public static function formulaire_touite(): string
     {
         $html = '<form method="post" enctype="multipart/form-data">
