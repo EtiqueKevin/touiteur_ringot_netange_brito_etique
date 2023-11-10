@@ -4,8 +4,7 @@
 > Touiteur est un projet qui a pour but de développer une application web sécurisée similaire à Twitter.
 
 > Membres du groupe :
-> - [Etique Kévin]
-> - [Brito Clément]
-> - [Netange Clément]
-> - [Ringot Mathias]
-
+> - [Etique Kévin](https://github.com/EtiqueKevin)
+> - [Brito Clément](https://github.com/TyrYoxan)
+> - [Netange Clément](https://github.com/clem-png)
+> - [Ringot Mathias](https://github.com/4n0m4lie)
