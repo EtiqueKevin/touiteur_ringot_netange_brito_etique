@@ -25,7 +25,7 @@ class UtilisateurRenderer{
                   <div id="profil-head">
                 <img class="profil-pdp" src='.$pdp.' alt="pdp"><p class="profil-pseudo">'.$this->user->__get('pseudo').'</p></div><br>
                 <div id="follow-profil">
-                <p class="number-follow">0 Follow</p> <a href="truc.php"><p class="button">Follows</p></a></div></div>
+                <p class="number-follow">0 Follow</p> <a href="?action=follow&email='.$this->user->email.'"><p class="button">Follows</p></a></div></div>
                 <p class="profil-bio">'.$this->user->__get('bio').'</p><br>
                 </div>';
                     $html .= Home::AfficherTouitEmail($this->user->__get('email'));
