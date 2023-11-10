@@ -21,7 +21,7 @@ class ActionModifBio extends Action{
             $st->bindParam(2, $mail);
             $st->execute();
             $html = "<p>Modification réussie</p>";
-            header('location: ?action=page-utilisateur'); //redirection vers la page de l'utilisateur
+            header('location: ?action=page-utilisateur&page=1'); //redirection vers la page de l'utilisateur
         }
         else{ //formulaire de modification de la biographie
             $html =<<<HTML
