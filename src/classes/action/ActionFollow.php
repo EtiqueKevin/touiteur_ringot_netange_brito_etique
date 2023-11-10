@@ -33,7 +33,7 @@ class ActionFollow extends Action{
             }
         }else{
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
-            $html.= '<a href="index.php?action=gate">RETOUR</a>';
+            header('location: index.php/?action=gate');
         }
         return $html;
     }
