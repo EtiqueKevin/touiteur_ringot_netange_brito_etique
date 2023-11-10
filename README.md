@@ -1,5 +1,5 @@
-# Touiteur
-
+[Touiteur](https://webetu.iutnc.univ-lorraine.fr/~etique5u/sae_web_php/touiteur_ringot_netange_brito_etique-main/)
+===
 > Description :
 > Touiteur est un projet qui a pour but de développer une application web sécurisée similaire à Twitter.
 
@@ -9,4 +9,3 @@
 > - [Netange Clément]
 > - [Ringot Mathias]
 
-### [Touiteur](https://webetu.iutnc.univ-lorraine.fr/~etique5u/sae_web_php/touiteur_ringot_netange_brito_etique-main/)
