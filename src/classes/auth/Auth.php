@@ -127,27 +127,4 @@ class Auth
         $_SESSION['user'] = serialize($user);
     }
 
-    public static function checkAccess(string $role): void
-    {
-        if (!isset($_SESSION['user'])) {
-            throw new AuthException("Vous devez être connecté pour accéder à cette page.");
-        }
-        $user = unserialize($_SESSION['user']);
-        if ($user->role != $role) {
-            throw new AuthException("Vous n'avez pas les droits pour accéder à cette page.");
-        }
-    }
-
-    public static function checkAccountOwner(string $email): void
-    {
-        if (!isset($_SESSION['user'])) {
-            throw new AuthException("Vous devez être connecté pour accéder à cette page.");
-        }
-        $user = unserialize($_SESSION['user']);
-        if ($user->email != $email) {
-            throw new AuthException("Vous n'avez pas les droits pour accéder à cette page.");
-        }
-    }
-
-
 }

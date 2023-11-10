@@ -7,15 +7,19 @@ use touiteur\renderer\ListeTouitesRenderer;
 use touiteur\touites\ListeTouite;
 use touiteur\touites\Touite;
 
-class Home
-{
-    public static function afficherTouit(): string
-    {
+class Home{
+
+    //Permet d'afficher tous les touites
+    public static function afficherTouit(): string{
+
         $db = ConnectionFactory::makeConnection();
+
         $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email order by date desc");
         $res = $statement->execute();
         $touites = $statement->fetchAll();
         $listeTouite = new ListeTouite();
+
+        //On parcourt tous les touites et on les ajoute à la liste de touite
         foreach ($touites as $touite) {
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
@@ -27,8 +31,8 @@ class Home
         return $listeTouiteRenderer->render();
     }
 
-    public static function afficherTouitesSuivie(): string
-    {
+    //Permet d'afficher les touites suivis par l'utilisateur (tag et utilisateur suivis)
+    public static function afficherTouitesSuivie(): string{
         $db = ConnectionFactory::makeConnection();
 
         $st1 = $db->prepare("Select emailfollowed from FollowUser where emailfollower = ?");
@@ -54,14 +58,16 @@ class Home
         return $listeTouiteRenderer->render();
     }
 
-    public static function afficherTouitEmail($email): string
-    {
+    //Permet d'afficher les touites d'un utilisateur
+    public static function afficherTouitEmail($email): string{
+
         $db = ConnectionFactory::makeConnection();
         $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email where email = ? order by date desc");
         $statement->bindParam(1, $email);
         $res = $statement->execute();
         $touites = $statement->fetchAll();
         $listeTouite = new ListeTouite();
+
         foreach ($touites as $touite) {
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
@@ -73,8 +79,9 @@ class Home
         return $listeTouiteRenderer->render();
     }
 
-    public static function afficherTouitTag($tag): string
-    {
+    //Permet d'afficher les touites d'un tag
+    public static function afficherTouitTag($tag): string{
+
         $db = ConnectionFactory::makeConnection();
         $statement = $db->prepare("Select id, text, date, author, img from Touite inner join TouiteTag on Touite.id = TouiteTag.idTouite where TouiteTag.idTag = ? order by date desc");
         $statement->bindParam(1, $tag);
@@ -95,4 +102,5 @@ class Home
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();
     }
+
 }
