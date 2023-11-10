@@ -24,13 +24,12 @@ use touiteur\action\ActionUtilisateur;
 
 require_once 'vendor/autoload.php';
 
-class Dispatcher
-{
-    public function run(): void
-    {
+class Dispatcher{
+    public function run(): void{
 
         $action = $_GET['action'] ?? 'gate';
 
+        //l'ensemble des actions possibles
 
         switch ($action) {
             case 'inscription':
@@ -48,6 +47,8 @@ class Dispatcher
             case 'page-utilisateur':
                 $ap = new ActionProfile();
                 $html = $ap->execute();
+
+                //Session position permet de savoir sur quelle page on est quand on like
                 $_SESSION['position'] = 'profile';
                 break;
             case 'publier-touite':
@@ -61,11 +62,15 @@ class Dispatcher
             case 'home-page':
                 $ah = new ActionHome();
                 $html = $ah->execute();
+
+                //Session position permet de savoir sur quelle page on est quand on like
                 $_SESSION['position'] = 'home';
                 break;
             case 'discover':
                 $d = new ActionDiscover();
                 $html = $d->execute();
+
+                //Session position permet de savoir sur quelle page on est quand on like
                 $_SESSION['position'] = 'discover';
                 break;
             case 'like':
@@ -117,9 +122,9 @@ class Dispatcher
         $d->renderPage($html);
     }
 
-    public function renderPage(string $h): void
-    {
+    public function renderPage(string $h): void{
 
+        //Si l'utilisateur est connecté on affiche les boutons de navigation
         if (isset($_SESSION['user'])) {
             $k = <<<HTML
             <a href="?action=discover&page=1"><button class="button">Discover</button></a>

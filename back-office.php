@@ -26,16 +26,23 @@ switch ($action) {
             $st->execute();
 
             $user = $st->fetchColumn();
-            if ($user === false and $user['role'] != 100) {
-                throw new Exception("erreur connexion");
-            }
-            if (!password_verify($passwd, $user)) {
-                throw new Exception("erreur connexion");
-            } else {
+            try {
+                if ($user === false and $user['role'] != 100) {
+                    throw new Exception("erreur connexion");
+                }
+                if (!password_verify($passwd, $user)) {
+                    throw new Exception("erreur connexion");
+                } else {
 
-                $_SESSION['admin'] = true;
-                header('location: ?action=most-followed');
+                    $_SESSION['admin'] = true;
+                    header('location: ?action=most-followed');
+                }
             }
+            catch (Exception $e) {
+                $html = '<h1>Erreur de connexion</h1>';
+                $html .= '<a href="?action=connexion">Réessayer</a>';
+            }
+
         } else {
             $html = <<<HTML
             <div id="auth">
@@ -62,7 +69,7 @@ switch ($action) {
         $html .= '</table>';
         break;
     case 'most-tagFollowed':
-        $query = 'SELECT COUNT(email) as nbTag, tag FROM FollowTag inner join Tag on FollowTag.idTag = Tag.id  GROUP BY FollowTag.idTag ORDER BY nbTag LIMIT 10';
+        $query = 'SELECT COUNT(email) as nbTag, tag FROM Followtag inner join Tag on Followtag.idTag = Tag.id  GROUP BY Followtag.idTag ORDER BY nbTag LIMIT 10';
         $st = $bdd->prepare($query);
         $st->execute();
 
@@ -74,6 +81,7 @@ switch ($action) {
         break;
     case 'deconnexion':
         unset($_SESSION['admin']);
+        header('location: ?action=connexion');
         break;
     case 'home-page':
         $html = '<h1>HOME PAGE</h1>';

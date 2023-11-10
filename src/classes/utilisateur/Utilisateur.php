@@ -5,18 +5,46 @@ namespace touiteur\utilisateur;
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyValueException;
 
+/**
+ *
+ */
 class Utilisateur
 {
 
+    /**
+     * @var string
+     */
     private string $pseudo;
+    /**
+     * @var string
+     */
     private string $email;
+    /**
+     * @var string
+     */
     private string $mdp;
+    /**
+     * @var string
+     */
     private string $photo;
+    /**
+     * @var string
+     */
     private string $bio;
+    /**
+     * @var string
+     */
     private string $role;
 
-    public function __construct(string $pseudo, string $email, string $mdp, string $role, string $photo = "ressources/Z.png", string $bio = "Exprimez-vous")
-    {
+    /**
+     * @param string $pseudo
+     * @param string $email
+     * @param string $mdp
+     * @param string $role
+     * @param string $photo
+     * @param string $bio
+     */
+    public function __construct(string $pseudo, string $email, string $mdp, string $role, string $photo = "ressources/Z.png", string $bio = "Exprimez-vous"){
         $this->pseudo = $pseudo;
         $this->email = $email;
         $this->mdp = $mdp;
@@ -25,8 +53,14 @@ class Utilisateur
         $this->bio = $bio;
     }
 
-    public static function hasLiked($email, $idTouite): bool
-    {
+    /**
+     * vérifie si l'utilisateur a déjà liké le touite
+     *
+     * @param $email
+     * @param $idTouite
+     * @return bool
+     */
+    public static function hasLiked($email, $idTouite): bool{
         $booleen = true;
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM HasLiked WHERE email = ? AND idTouite = ?';
@@ -38,8 +72,13 @@ class Utilisateur
         return $st->fetch() !== false;
     }
 
-    public static function getFollower($email)
-    {
+    /**
+     *  retourne les utilisateurs qui suivent l'utilisateur
+     *
+     * @param $email
+     * @return mixed
+     */
+    public static function getFollower($email){
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT count(*) FROM FollowUser WHERE emailFollowed = ?';
         $st = $bd->prepare($query);
@@ -49,8 +88,14 @@ class Utilisateur
         return $result['count(*)'];
     }
 
-    public static function hasFollow($emailFollower, $emailFollowed): bool
-    {
+    /**
+     * vérifie si l'utilisateur suit un autre utilisateur
+     *
+     * @param $emailFollower
+     * @param $emailFollowed
+     * @return bool
+     */
+    public static function hasFollow($emailFollower, $emailFollowed): bool{
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM FollowUser WHERE emailFollower = ? AND emailFollowed = ?';
         $st = $bd->prepare($query);
@@ -60,8 +105,14 @@ class Utilisateur
         return $st->fetch() !== false;
     }
 
-    public static function hasFollowTag($emailFollower, $idTag)
-    {
+    /**
+     * vérifie si l'utilisateur suit un tag
+     *
+     * @param $emailFollower
+     * @param $idTag
+     * @return bool
+     */
+    public static function hasFollowTag($emailFollower, $idTag){
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM FollowTag WHERE email = ? AND idTag = ?';
         $st = $bd->prepare($query);
@@ -71,8 +122,14 @@ class Utilisateur
         return $st->fetch() !== false;
     }
 
-    public function __get($property): mixed
-    {
+    /**
+     * getter
+     *
+     * @param $property
+     * @return mixed
+     * @throws InvalidPropertyValueException
+     */
+    public function __get($property): mixed{
         if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
             return $this->$property;
         } else {
@@ -80,8 +137,15 @@ class Utilisateur
         }
     }
 
-    public function __set($property, $value): void
-    {
+    /**
+     * setter
+     *
+     * @param $property
+     * @param $value
+     * @return void
+     * @throws InvalidPropertyValueException
+     */
+    public function __set($property, $value): void{
         if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
             $this->$property = $value;
         } else {
@@ -89,8 +153,13 @@ class Utilisateur
         }
     }
 
-    public function afficherFollowers()
-    {
+
+    /**
+     * affiche les utilisateurs qui suivent l'utilisateur
+     *
+     * @return void
+     */
+    public function afficherFollowers(){
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM Utilisateur INNER JOIN FollowUser on Utilisateur.email = FollowUser.email WHERE email = ?';
         $st = $bd->prepare($query);
