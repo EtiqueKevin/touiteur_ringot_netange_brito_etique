@@ -21,7 +21,7 @@ class ActionUtilisateur extends Action
         $st->execute();
         $result = $st->fetch();
         //on regarde si il y a une pdp, si non on met une pdp par defaut et si oui on met la pdp
-        $pdp = $result['pdp'] === null ? "ressources/Z.png" : $result['photo'];
+        $pdp = $result['pdp'] === null ? "ressources/Z.png" : $result['img'];
         //on regarde si il y a une bio, si non on met une bio par defaut et si oui on met la bio
         $bio = $result['bio'] === null ? "Exprimez-vous" : $result['bio'];
         //on cree l'utilisateur
