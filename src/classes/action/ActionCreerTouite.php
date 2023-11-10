@@ -106,7 +106,7 @@ class ActionCreerTouite extends Action{
             }
 
             $html = "Touite publié";
-            header('location: ?action=home-page');
+            header('location: ?action=home-page&page=1');
         }
         else{
             $html = HomeTouite::formulaire_touite();

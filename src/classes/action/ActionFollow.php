@@ -35,7 +35,7 @@ class ActionFollow extends Action{
                 $st->execute();
                 $result = $st->fetch();
                 $pseudo = $result['pseudo'];
-                header('location: ?action=profile&pseudo='.$pseudo);
+                header('location: ?action=profile&pseudo='.$pseudo.'&page=1');
             }
         }else{
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
