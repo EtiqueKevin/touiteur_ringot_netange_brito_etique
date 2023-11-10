@@ -53,7 +53,7 @@ class Utilisateur{
 
     public static function getFollower($email){
         $bd = ConnectionFactory::makeConnection();
-        $query = 'SELECT count(*) FROM followuser WHERE emailFollowed = ?';
+        $query = 'SELECT count(*) FROM FollowUser WHERE emailFollowed = ?';
         $st = $bd->prepare($query);
         $st->bindParam(1, $email);
         $st->execute();
