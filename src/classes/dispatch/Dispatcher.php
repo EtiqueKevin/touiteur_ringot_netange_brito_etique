@@ -85,9 +85,9 @@ class Dispatcher{
 
         if (isset($_SESSION['user'])) {
         $k=<<<HTML
-            <a href="?action=discover"><button class="button">Discover</button></a>
+            <a href="?action=discover&page=1"><button class="button">Discover</button></a>
             <a href="?action=publier-touite"><button class="button"><strong>+</strong></button></a>
-            <a href="?action=page-utilisateur"><button class='button'>Profil</button></a>
+            <a href="?action=page-utilisateur&page=1"><button class='button'>Profil</button></a>
             <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
 
 HTML;
@@ -111,7 +111,7 @@ HTML;
     <body>
     <nav class='navbar'>
         <div id='logo' >
-            <a href="?action=home-page"><img src='ressources/logo_blanc.png' alt='logo' > </a>
+            <a href="?action=home-page&page=1"><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
 HTML.$k.<<<HTML

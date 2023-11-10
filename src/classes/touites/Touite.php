@@ -1,7 +1,7 @@
 <?php
 
 namespace touiteur\touites;
-
+define('TOUITE_PAR_PAGE', 10);
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyNameException;
 use touiteur\exception\InvalidPropertyValueException;
@@ -83,5 +83,16 @@ class Touite{
         $st->execute();
         $result = $st->fetch();
         return $result === false ? 0 : $result['likes'];
+    }
+    public static function pagination(array $tab): array{
+
+        // Récupérer la page actuelle
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        // Calculer l'offset pour la requête SQL
+        $offset = ($page - 1) * TOUITE_PAR_PAGE;
+
+        $_SESSION['nbTouite'] = sizeof($tab);
+
+        return array_slice($tab, $offset, $offset + TOUITE_PAR_PAGE);
     }
 }

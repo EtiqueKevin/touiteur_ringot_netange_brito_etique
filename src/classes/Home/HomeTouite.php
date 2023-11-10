@@ -43,7 +43,7 @@ class HomeTouite{
                 $st->execute();
 
 
-                return '<a id="tag" href="?action=ActionTag&idTag=' . $st->fetch()['id'] . '">#' . $matches[2] . '</a>';
+                return '<a id="tag" href="?action=ActionTag&idTag=' . $st->fetch()['id'] . '&page=1">#' . $matches[2] . '</a>';
             },
             $touite
         );
