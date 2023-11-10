@@ -32,8 +32,9 @@ switch ($action) {
             if (!password_verify($passwd, $user)) {
                 throw new Exception("erreur connexion");
             } else {
-                $html = "Utilisateur trouvé";
+
                 $_SESSION['admin'] = true;
+                header('location: ?action=most-followed');
             }
         } else {
             $html = <<<HTML
@@ -87,7 +88,7 @@ $k = '';
 if (isset($_SESSION['admin'])) {
     $k = <<<HTML
             <a href="?action=most-followed"><button class="button">Influenceur</button></a>
-            <a href="?action=most-tagFollowed"><button class='button'>tag les plus utilisés</button></a>
+            <a href="?action=most-tagFollowed"><button class='button'>Tag suivis</button></a>
             <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
 HTML;
 }
