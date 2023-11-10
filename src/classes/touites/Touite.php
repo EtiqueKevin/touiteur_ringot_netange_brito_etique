@@ -104,4 +104,23 @@ class Touite{
 
         return array_slice($tab, $offset, $offset + TOUITE_PAR_PAGE);
     }
+    
+    public static function supprimerTouite($id){
+        $bd = ConnectionFactory::makeConnection();
+        $sql = "DELETE FROM HasLiked WHERE idTouite = ?";
+        $st = $bd->prepare($sql);
+        $st->bindParam(1, $id);
+        $st->execute();
+
+        $sql = "DELETE FROM TouiteTag WHERE idTouite = ?";
+        $st = $bd->prepare($sql);
+        $st->bindParam(1, $id);
+        $st->execute();
+
+        $sql = "DELETE FROM Touite WHERE id = ?";
+        $st = $bd->prepare($sql);
+        $st->bindParam(1, $id);
+        $st->execute();
+    }
+
 }
