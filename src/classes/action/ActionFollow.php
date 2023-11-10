@@ -28,8 +28,14 @@ class ActionFollow extends Action{
                 $st->bindParam(1, $user);
                 $st->bindParam(2, $email);
                 $st->execute();
-                $au = new ActionUtilisateur();
-                $html = $au->execute();
+
+                $sql = "SELECT pseudo FROM Utilisateur WHERE email = ?";
+                $st = $bd->prepare($sql);
+                $st->bindParam(1, $email);
+                $st->execute();
+                $result = $st->fetch();
+                $pseudo = $result['pseudo'];
+                header('location: ?action=profile&pseudo='.$pseudo);
             }
         }else{
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
