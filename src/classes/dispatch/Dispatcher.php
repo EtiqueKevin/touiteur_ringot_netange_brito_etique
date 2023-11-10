@@ -61,6 +61,10 @@ class Dispatcher{
                 $l = new ActionLike();
                 $html = $l->execute();
                 break;
+            case 'follow':
+                $f = new ActionFollow();
+                $html = $f->execute();
+                break;
             default:
                 $html = '<h1>Par default</h1>';
             break;
