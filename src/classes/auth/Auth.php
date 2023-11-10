@@ -56,7 +56,7 @@ class Auth {
             $passwd_hash = password_hash($_POST['passe1'], PASSWORD_DEFAULT, ['cost' => 12]);
             $query = 'INSERT INTO `Utilisateur` (`email`,`pseudo`, `mdp`) VALUES (?, ?, ?)';
             $st = $bd->prepare($query);
-            $st->bindParam(1, $email);
+            $st->bindParam(1, $_POST['email']);
             $st->bindParam(2, $_POST['pseudo']);
             $st->bindParam(3, $passwd_hash);
 

@@ -1,9 +1,13 @@
 <?php
 
+use touiteur\DataBase\ConnectionFactory;
+
 session_start();
 
+require_once 'vendor/autoload.php';
+
 ConnectionFactory::setConfig("conf/config.ini");
-$bdd = \iutnc\deefy\db\ConnectionFactory::makeConnection();
+$bdd = ConnectionFactory::makeConnection();
 
 
 $action = $_GET['action'] ?? 'connexion';
@@ -35,7 +39,7 @@ switch ($action){
         }
         else {
             $html = <<<HTML
-            <form method="post" action="index.php?action=auth-user">
+            <form method="post">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
                 <label for="passwd">Mot de passe</label>
@@ -56,13 +60,13 @@ switch ($action){
         $html .= '</table>';
         break;
     case 'most-tagFollowed':
-        $query = 'SELECT COUNT(email) as nbTag, idTag FROM FollowTag GROUP BY idTag ORDER BY nbTag LIMIT 10';
+        $query = 'SELECT COUNT(email) as nbTag, tag FROM FollowTag inner join Tag on FollowTag.idTag = Tag.id  GROUP BY FollowTag.idTag ORDER BY nbTag LIMIT 10';
         $st = $bdd->prepare($query);
         $st->execute();
 
         $html = '<table>';
         while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-            $html .= '<tr><td>' . $row['idTag'] . '</td><td>' . $row['nbTag'] . '</td></tr>';
+            $html .= '<tr><td>' . $row['tag'] . '</td><td>' . $row['nbTag'] . '</td></tr>';
         }
         $html .= '</table>';
     break;
