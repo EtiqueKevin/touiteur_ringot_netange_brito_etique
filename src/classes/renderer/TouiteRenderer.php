@@ -23,6 +23,7 @@ class TouiteRenderer
             $selector = $selector == 3 ? 4 : 2;
         }
         $text = HomeTouite::active_tag($this->touite->texte);
+        $corbeille = '<div ><a href="?action=delete&id=' . $this->touite->id . '&page=1"><img id="corbeille" src="ressources/corbeille.png"></a></div>';
         $html = "<div class='touite'>";
         switch ($selector) {
             case 1:
@@ -67,7 +68,9 @@ class TouiteRenderer
                 <p class="touite-content-full">' . $text . '</p><br>';
                     $html .= $this->touite->photo != null ? '<img src="' . $this->touite->photo . '">' : "";
                     $html .= '</div> <div id="likes-counter"> <p class="number-likes">' . Touite::getLikes($this->touite->id) . ' Likes</p><a href="?action=like&id=' . $this->touite->id . '&page=1">';
-                    $html .= Utilisateur::hasLiked($user->email, $this->touite->id) ? '<img id="unlike" src="ressources/Heart.png"></a></p></div></div>' : '<img id="like" src="ressources/Heart.png"></a></p></div></div>';
+                    $html .= Utilisateur::hasLiked($user->email, $this->touite->id) ? '<img id="unlike" src="ressources/Heart.png"></a></p></div></div>' : '<img id="like" src="ressources/Heart.png"></a></p></div>';
+                    $html .= $corbeille;
+                    $html .= '</div>';
 
 
                 } catch (InvalidPropertyValueException $e) {
@@ -84,8 +87,9 @@ class TouiteRenderer
                 <h2 class="touite-author"><a href="?action=ActionUtilisateur&pseudo=' . $this->touite->auteur . '&page=1">' . $this->touite->auteur . '</a></h2><h2>' . $this->touite->aff_date() . '</h2><br></div>
                 <p class="touite-content-full">' . $text . '</p><br>';
                     $html .= $this->touite->photo != null ? '<img src="' . $this->touite->photo . '">' : "";
-                    $html .= '</div> <div id="likes-counter"> <p class="number-likes">' . Touite::getLikes($this->touite->id) . ' Likes</p>';
-                    $html .= '</div></div>';
+                    $html .= '</div> <div id="likes-counter"> <p class="number-likes">' . Touite::getLikes($this->touite->id) . ' Likes</p></div>';
+                    $html .= $corbeille;
+                    $html .= '</div>';
 
 
                 } catch (InvalidPropertyValueException $e) {

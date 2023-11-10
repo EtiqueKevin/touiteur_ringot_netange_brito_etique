@@ -41,10 +41,9 @@ class HomeTouite
         return preg_replace_callback('/(?<=([^&])|^)#([a-zA-Z0-9éâîôùèçàïû]+)/',
             function ($matches) {
                 $b = ConnectionFactory::makeConnection();
-                $m = filter_var($matches[2], FILTER_SANITIZE_STRING);
                 $query = 'SELECT id FROM `Tag` WHERE tag = ?';
                 $st = $b->prepare($query);
-                $st->bindParam(1, $m);
+                $st->bindParam(1, $matches[2]);
                 $st->execute();
 
 

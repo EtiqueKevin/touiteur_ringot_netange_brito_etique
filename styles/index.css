@@ -396,3 +396,13 @@ a {
     display: block;
     border-radius: 50%;
 }
+
+#corbeille {
+    background-color: #ff0000;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 15px;
+    padding: 5px;
+    text-align: right;
+}
+

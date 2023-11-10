@@ -17,6 +17,7 @@ use touiteur\action\ActionModifBio;
 use touiteur\action\ActionModifPP;
 use touiteur\action\ActionNarcisse;
 use touiteur\action\ActionProfile;
+use touiteur\action\ActionSuppTouite;
 use touiteur\action\ActionTag;
 use touiteur\action\ActionUtilisateur;
 
@@ -99,10 +100,14 @@ class Dispatcher
                 $f = new ActionModifPP();
                 $html = $f->execute();
                 break;
-                case 'narcisse':
+            case 'narcisse':
                 $f = new ActionNarcisse();
                 $html = $f->execute();
-                    break;
+                break;
+            case 'delete':
+                $f = new ActionSuppTouite();
+                $html = $f->execute();
+                break;
             default:
                 $html = '<h1>Par default</h1>';
                 break;
