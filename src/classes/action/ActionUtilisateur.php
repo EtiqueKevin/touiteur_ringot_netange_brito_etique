@@ -13,6 +13,7 @@ class ActionUtilisateur extends Action
     {
 
         $pseudo = $_GET['pseudo'];
+        $pseudo = filter_var($pseudo, FILTER_SANITIZE_STRING);
         $db = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM Utilisateur WHERE pseudo = ?';
         $st = $db->prepare($query);

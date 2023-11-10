@@ -12,6 +12,7 @@ class ActionFollowTag extends Action
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_SESSION['user'])) {
                 $tag = $_GET['idTag'];
+                $tag = filter_var($tag, FILTER_SANITIZE_NUMBER_INT);
                 $user = unserialize($_SESSION['user'])->email;
                 $bd = ConnectionFactory::makeConnection();
                 $sql = "SELECT * FROM FollowTag where email = ? and idTag = ?";

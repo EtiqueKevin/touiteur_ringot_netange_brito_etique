@@ -14,6 +14,7 @@ class ActionLike extends Action
             if (isset($_SESSION['user'])) {
                 $user = unserialize($_SESSION['user'])->email;
                 $id = $_GET['id'];
+                $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
                 $bd = ConnectionFactory::makeConnection();
                 $sql = "SELECT * FROM HasLiked where email = ? and idTouite = ?";
                 $st = $bd->prepare($sql);

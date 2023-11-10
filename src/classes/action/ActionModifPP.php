@@ -71,12 +71,13 @@ class ActionModifPP extends Action{
         else{
             $html =<<<HTML
             <div>
+            
+            <form method="post" enctype="multipart/form-data"><div id="form-edit">
             <h1>Modifier votre photo de profil</h1>
-            <form method="post" enctype="multipart/form-data">
-                <label for="bio">Photo de profil</label>
+                <label for="photo">Photo de profil</label>
                 <input type="file" name="photo" id="photo" required><br><br>
                 <input type="submit" value="Envoyer">
-            </div>
+            </div><div></form>
 HTML;
 
         }

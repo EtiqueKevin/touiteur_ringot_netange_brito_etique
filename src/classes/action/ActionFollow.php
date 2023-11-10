@@ -12,6 +12,7 @@ class ActionFollow extends Action
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_SESSION['user'])) {
                 $email = $_GET['email'];
+                $email = filter_var($email, FILTER_SANITIZE_EMAIL);
                 $user = unserialize($_SESSION['user'])->email;
                 $bd = ConnectionFactory::makeConnection();
                 $sql = "SELECT * FROM FollowUser where emailFollower = ? and emailFollowed = ?";
