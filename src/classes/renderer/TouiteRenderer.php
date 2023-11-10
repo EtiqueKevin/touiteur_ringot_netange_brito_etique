@@ -4,6 +4,7 @@ namespace touiteur\renderer;
 
 use touiteur\exception\InvalidPropertyValueException;
 use touiteur\touites\Touite;
+use touiteur\utilisateur\Utilisateur;
 
 class TouiteRenderer{
 
@@ -18,13 +19,14 @@ class TouiteRenderer{
         switch ($selector){
             case 1:
                 try {
+                    $user = unserialize($_SESSION['user']);
                     $html .= '<div id="block-touite">
                 <div id="touite">
                 <div id="touite-head">
                 <h2 class="touite-author"><a href="utilisateur.php">'.$this->touite->auteur.'</a></h2><br></div>
                 <p class="touite-content">'.$this->touite->texte.'</p><br>';
                 $html .= $this->touite->photo != null ? "image..." : "";
-                $html .='</div> <a href="?action=like&id='.$this->touite->id.'"><img id="like" src="ressources/Heart.png"></a></p></div>';
+                $html .= Utilisateur::hasLiked($user->email, $this->touite->id) ? '</div> <a href="?action=like&id='.$this->touite->id.'"><img id="unlike" src="ressources/Heart.png"></a></p></div>' : '</div> <a href="?action=like&id='.$this->touite->id.'"><img id="like" src="ressources/Heart.png"></a></p></div>';
 
 
                 } catch (InvalidPropertyValueException $e) {

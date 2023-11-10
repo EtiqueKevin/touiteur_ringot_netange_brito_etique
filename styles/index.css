@@ -120,6 +120,22 @@ a {
   filter: invert(100%);
 }
 
+#unlike {
+  background-color: #c468a8;
+  filter: invert(100%);
+
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 15px;
+    padding: 5px;
+  text-align: right;
+}
+/* changer l'image de l'objet img dans la navbar*/
+#unlike:hover {
+  background-color: #86da85;
+  filter: none;
+}
+
 #block-touite {
   max-width: 600px;
   max-height: 320px;

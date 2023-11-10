@@ -46,10 +46,8 @@ class Utilisateur{
         $st->bindParam(1, $email);
         $st->bindParam(2, $idTouite);
         $st->execute();
-        if($st->fetchAll() === false){
-            $booleen = false;
-        }
-        return $booleen;
+
+        return $st->fetch() !==  false;
     }
 
 
