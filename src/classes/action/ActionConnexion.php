@@ -15,7 +15,7 @@ class ActionConnexion extends Action{
                 Auth::authenticate($_POST['email'], $_POST['passe']);
                 Auth::loadProfile($_POST['email']);
                 $html = "<p>Connexion réussie</p>";
-                header('location: index.php/?action=home');
+                header('location: ?action=home');
             } catch (AuthException $e) {
                 $html = "<p> Connexion échoué</p>";
                 $html .= "<a href='?action=gate'>Ressayer</a>";

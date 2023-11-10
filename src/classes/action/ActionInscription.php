@@ -14,10 +14,10 @@ class ActionInscription extends Action {
             try {
                 Auth::register($_POST['pseudo'],$_POST['passe1']);
                 $html="<p>inscription réussie</p>";
-                header('location: index.php/?action=gate');
+                header('location: ?action=gate');
             }catch(AuthException $e){
                 $html="<p> ERROR</p>";
-                header('location: index.php/?action=inscription');
+                header('location: ?action=inscription');
             }
 
         } else {

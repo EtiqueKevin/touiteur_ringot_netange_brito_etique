@@ -53,7 +53,7 @@ class ActionLike extends Action
 
             else{
                 $html = '<h1>Vous devez être connecté pour pouvoir liker un touite</h1>';
-                header('location: index.php/?action=gate');
+                header('location: ?action=gate');
             }
         }
         return $html;
