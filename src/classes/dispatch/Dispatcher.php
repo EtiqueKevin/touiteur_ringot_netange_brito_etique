@@ -113,6 +113,28 @@ HTML.$k.<<<HTML
         </div>
     </nav>
 HTML.$h.<<<HTML
+<script>
+    // Fonction pour sauvegarder la position de défilement
+    function saveScrollPosition() {
+      const scrollPosition = window.scrollY || window.pageYOffset;
+      localStorage.setItem('scrollPosition', scrollPosition.toString());
+    }
+
+    // Fonction pour restaurer la position de défilement
+    function restoreScrollPosition() {
+      const savedScrollPosition = localStorage.getItem('scrollPosition');
+
+      if (savedScrollPosition) {
+        window.scrollTo(0, parseInt(savedScrollPosition, 10));
+      }
+    }
+
+    // Écouteur d'événement pour sauvegarder la position de défilement avant le rechargement
+    window.addEventListener('beforeunload', saveScrollPosition);
+
+    // Restaurer la position de défilement après le rechargement de la page
+    window.addEventListener('load', restoreScrollPosition);
+  </script>
     </body>
 </html>
 HTML;
