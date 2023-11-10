@@ -1,6 +1,7 @@
 <?php
 
 namespace touiteur\action;
+
 use touiteur\DataBase\ConnectionFactory;
 
 class ActionLike extends Action
@@ -49,9 +50,7 @@ class ActionLike extends Action
                     $ad = new ActionDiscover();
                     $html = $ad->execute();
                 }
-            }
-
-            else{
+            } else {
                 $html = '<h1>Vous devez être connecté pour pouvoir liker un touite</h1>';
                 header('location: ?action=gate');
             }

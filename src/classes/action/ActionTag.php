@@ -32,11 +32,11 @@ class ActionTag extends Action
         $st->execute();
         $result = $st->fetchAll();
         $follow = count($result);
-        if(isset($_SESSION['user'])){
+        if (isset($_SESSION['user'])) {
             $user = unserialize($_SESSION['user']);
 
-            $button .= Utilisateur::hasFollowTag($user->email, $_GET['idTag']) ? '<a href="?action=followTag&idTag='.$_GET['idTag'].'">
-            <p class="button">Unfollow</p></a></div></div> ' : '<a href="?action=followTag&idTag='.$_GET['idTag'].'"><p class="button">Follow</p></a></div></div>';
+            $button .= Utilisateur::hasFollowTag($user->email, $_GET['idTag']) ? '<a href="?action=followTag&idTag=' . $_GET['idTag'] . '">
+            <p class="button">Unfollow</p></a></div></div> ' : '<a href="?action=followTag&idTag=' . $_GET['idTag'] . '"><p class="button">Follow</p></a></div></div>';
         }
 
 
@@ -44,10 +44,10 @@ class ActionTag extends Action
         $html .= '<div id="tag-page">
                    <div id="tag-top">
                   <div id="tag-head">
-                <p class="tag-name"> #'.$tagName.'</p></div><br>
+                <p class="tag-name"> #' . $tagName . '</p></div><br>
                 <div id="follow-tag">';
 
-        $html.='<p class="number-follow">'. $follow . ' Followers</p>';
+        $html .= '<p class="number-follow">' . $follow . ' Followers</p>';
         $html .= $button;
         $html .= '</div></div></div>';
         $html .= Home::afficherTouitTag($idTag);

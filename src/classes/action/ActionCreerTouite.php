@@ -6,20 +6,19 @@ use PDO;
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\Home\HomeTouite;
 
-class ActionCreerTouite extends Action{
+class ActionCreerTouite extends Action
+{
 
-    public function execute(): string{
+    public function execute(): string
+    {
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $text = filter_var($_POST['txtMessage'], FILTER_SANITIZE_STRING);
             //
 
 
-
-
             $d = date('Y-m-d H:i:s');
             $mail = unserialize($_SESSION['user'])->email;
-
 
 
             $bd = ConnectionFactory::makeConnection();
@@ -32,37 +31,35 @@ class ActionCreerTouite extends Action{
             $idT = $row['MAX(id)'] + 1;
 
             $img = $_FILES['img'];
-            if ($img['size'] > 0){
+            if ($img['size'] > 0) {
                 $fileDestination = 'ressources/' . $idT;
                 //
                 $fileType = $_FILES['img']['type'];
                 if ($fileType === 'image/png' || $fileType === 'image/jpeg' || $fileType === 'image/jpg' || $fileType === 'image/gif') {
                     switch ($fileType) {
                         case 'image/png':
-                            $fileDestination .='.png';
+                            $fileDestination .= '.png';
                             break;
                         case 'image/jpeg':
-                            $fileDestination .='.jpeg';
+                            $fileDestination .= '.jpeg';
                             break;
                         case 'image/jpg':
-                            $fileDestination .='.jpg';
+                            $fileDestination .= '.jpg';
                             break;
                         case 'image/gif':
-                            $fileDestination .='.gif';
+                            $fileDestination .= '.gif';
                             break;
                         default:
-                            $fileDestination .='.png';
+                            $fileDestination .= '.png';
                             break;
                     }
 
                     move_uploaded_file($img['tmp_name'], $fileDestination);
 
-                }
-                else{
+                } else {
                     $fileDestination = "ressources/Z.png";
                 }
-            }
-            else{
+            } else {
                 $fileDestination = null;
             }
 
@@ -83,7 +80,7 @@ class ActionCreerTouite extends Action{
 
 
             $tab = HomeTouite::recup_tag($text);
-            foreach ($tab as $tg){
+            foreach ($tab as $tg) {
 
                 $q = 'SELECT * FROM `Tag` WHERE `tag` = ?';
                 $s = $bd->prepare($q);
@@ -92,7 +89,7 @@ class ActionCreerTouite extends Action{
                 $s->setFetchMode(PDO::FETCH_ASSOC);
                 $rowCount = $s->rowCount();
 
-                if($rowCount == 0){
+                if ($rowCount == 0) {
                     $query = 'INSERT INTO `Tag` (`tag`) VALUES (?)';
                     $st = $bd->prepare($query);
                     $st->bindParam(1, $tg);
@@ -107,8 +104,7 @@ class ActionCreerTouite extends Action{
 
             $html = "Touite publié";
             header('location: ?action=home-page&page=1');
-        }
-        else{
+        } else {
             $html = HomeTouite::formulaire_touite();
         }
         return $html;

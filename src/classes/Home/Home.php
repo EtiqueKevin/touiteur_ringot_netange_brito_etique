@@ -7,8 +7,10 @@ use touiteur\renderer\ListeTouitesRenderer;
 use touiteur\touites\ListeTouite;
 use touiteur\touites\Touite;
 
-class Home{
-    public static function afficherTouit(): string{
+class Home
+{
+    public static function afficherTouit(): string
+    {
         $db = ConnectionFactory::makeConnection();
         $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email order by date desc");
         $res = $statement->execute();
@@ -18,16 +20,18 @@ class Home{
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
             $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
-            $listeTouite->addTouite($nouveauTouite);}
+            $listeTouite->addTouite($nouveauTouite);
+        }
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();
     }
 
-    public static function afficherTouitesSuivie(): string{
+    public static function afficherTouitesSuivie(): string
+    {
         $db = ConnectionFactory::makeConnection();
 
-        $st1= $db->prepare("Select emailfollowed from FollowUser where emailfollower = ?");
+        $st1 = $db->prepare("Select emailfollowed from FollowUser where emailfollower = ?");
         //var_dump(unserialize($_SESSION['user'])->email);
         $mail = unserialize($_SESSION['user'])->email;
 
@@ -49,7 +53,9 @@ class Home{
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();
     }
-    public static function afficherTouitEmail($email): string{
+
+    public static function afficherTouitEmail($email): string
+    {
         $db = ConnectionFactory::makeConnection();
         $statement = $db->prepare("Select * from Touite inner join Utilisateur on Touite.author = Utilisateur.email where email = ? order by date desc");
         $statement->bindParam(1, $email);
@@ -60,13 +66,15 @@ class Home{
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
             $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
-            $listeTouite->addTouite($nouveauTouite);}
+            $listeTouite->addTouite($nouveauTouite);
+        }
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();
     }
 
-    public static function afficherTouitTag($tag): string{
+    public static function afficherTouitTag($tag): string
+    {
         $db = ConnectionFactory::makeConnection();
         $statement = $db->prepare("Select id, text, date, author, img from Touite inner join TouiteTag on Touite.id = TouiteTag.idTouite where TouiteTag.idTag = ? order by date desc");
         $statement->bindParam(1, $tag);
@@ -81,7 +89,8 @@ class Home{
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
             $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $pseudo, $img);
-            $listeTouite->addTouite($nouveauTouite);}
+            $listeTouite->addTouite($nouveauTouite);
+        }
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);
         return $listeTouiteRenderer->render();

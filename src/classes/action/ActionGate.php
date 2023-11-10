@@ -2,9 +2,11 @@
 
 namespace touiteur\action;
 
-class ActionGate extends Action{
+class ActionGate extends Action
+{
 
-    public function execute(): string{
+    public function execute(): string
+    {
         $html = <<<HTML
         <div id="gate">
             <p>Bienvenue sur Touiteur, le réseau social de l'avenir !</p>

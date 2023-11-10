@@ -7,51 +7,53 @@ use touiteur\action\ActionCreerTouite;
 use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionDiscover;
 use touiteur\action\ActionDisplayTouite;
+use touiteur\action\ActionFollow;
 use touiteur\action\ActionFollowTag;
 use touiteur\action\ActionGate;
 use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
 use touiteur\action\ActionLike;
 use touiteur\action\ActionProfile;
-use touiteur\action\ActionFollow;
 use touiteur\action\ActionTag;
 use touiteur\action\ActionUtilisateur;
 
 
 require_once 'vendor/autoload.php';
 
-class Dispatcher{
-    public function run(): void{
+class Dispatcher
+{
+    public function run(): void
+    {
 
         $action = $_GET['action'] ?? 'gate';
 
 
-        switch ($action){
+        switch ($action) {
             case 'inscription':
-                $ai= new ActionInscription();
+                $ai = new ActionInscription();
                 $html = $ai->execute();
-            break;
+                break;
             case 'connexion':
                 $ac = new ActionConnexion();
                 $html = $ac->execute();
-            break;
+                break;
             case 'gate':
                 $ag = new ActionGate();
                 $html = $ag->execute();
-            break;
+                break;
             case 'page-utilisateur':
                 $ap = new ActionProfile();
                 $html = $ap->execute();
                 $_SESSION['position'] = 'profile';
-            break;
+                break;
             case 'publier-touite':
                 $ap = new ActionCreerTouite();
                 $html = $ap->execute();
-            break;
+                break;
             case 'deconnexion':
-               $ad = new ActionDeconnexion();
-               $html = $ad->execute();
-            break;
+                $ad = new ActionDeconnexion();
+                $html = $ad->execute();
+                break;
             case 'home-page':
                 $ah = new ActionHome();
                 $html = $ah->execute();
@@ -70,10 +72,10 @@ class Dispatcher{
                 $f = new ActionFollow();
                 $html = $f->execute();
                 break;
-                case 'ActionUtilisateur':
-                    $f = new ActionUtilisateur();
-                    $html = $f->execute();
-                    break;
+            case 'ActionUtilisateur':
+                $f = new ActionUtilisateur();
+                $html = $f->execute();
+                break;
             case 'display-touite':
                 $d = new ActionDisplayTouite();
                 $html = $d->execute();
@@ -82,13 +84,13 @@ class Dispatcher{
                 $d = new ActionTag();
                 $html = $d->execute();
                 break;
-                case 'followTag':
+            case 'followTag':
                 $f = new ActionFollowTag();
                 $html = $f->execute();
                 break;
             default:
                 $html = '<h1>Par default</h1>';
-            break;
+                break;
         }
 
         $d = new Dispatcher();
@@ -99,19 +101,19 @@ class Dispatcher{
     {
 
         if (isset($_SESSION['user'])) {
-        $k=<<<HTML
+            $k = <<<HTML
             <a href="?action=discover&page=1"><button class="button">Discover</button></a>
             <a href="?action=publier-touite"><button class="button"><strong>+</strong></button></a>
             <a href="?action=page-utilisateur&page=1"><button class='button'>Profil</button></a>
             <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
 
 HTML;
-        }else {
-            $k=<<<HTML
+        } else {
+            $k = <<<HTML
                 <a href="?action=inscription"><button class='button' >Inscription</button></a>
                 <a href="?action=connexion"><button class='button'>Connexion</button></a>
 HTML;
-             }
+        }
 
         echo <<<HTML
 <!DOCTYPE html>
@@ -129,10 +131,10 @@ HTML;
             <a href="?action=home-page&page=1"><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
-HTML.$k.<<<HTML
+HTML. $k . <<<HTML
         </div>
     </nav>
-HTML.$h.<<<HTML
+HTML . $h . <<<HTML
 <script src="script/scroll.js"></script>
     </body>
 </html>

@@ -6,7 +6,8 @@ use touiteur\DataBase\ConnectionFactory;
 use touiteur\renderer\TouiteRenderer;
 use touiteur\touites\Touite;
 
-class ActionDisplayTouite extends Action{
+class ActionDisplayTouite extends Action
+{
 
     public function execute(): string
     {

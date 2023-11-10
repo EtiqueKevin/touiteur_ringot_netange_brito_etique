@@ -1,12 +1,7 @@
 <?php
 
-use touiteur\action\ActionConnexion;
-use touiteur\touites\Touite;
-use touiteur\touites\ListeTouite;
-use touiteur\renderer\ListeTouitesRenderer;
-use touiteur\renderer\TouiteRenderer;
-use touiteur\utilisateur\Utilisateur;
 use touiteur\renderer\UtilisateurRenderer;
+use touiteur\utilisateur\Utilisateur;
 
 require_once 'vendor/autoload.php';
 

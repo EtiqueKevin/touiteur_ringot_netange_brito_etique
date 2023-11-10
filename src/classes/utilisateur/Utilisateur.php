@@ -5,7 +5,8 @@ namespace touiteur\utilisateur;
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyValueException;
 
-class Utilisateur{
+class Utilisateur
+{
 
     private string $pseudo;
     private string $email;
@@ -14,7 +15,8 @@ class Utilisateur{
     private string $bio;
     private string $role;
 
-    public function __construct(string $pseudo, string $email, string $mdp, string $role,string $photo ="ressources/Z.png", string $bio="Exprimez-vous"){
+    public function __construct(string $pseudo, string $email, string $mdp, string $role, string $photo = "ressources/Z.png", string $bio = "Exprimez-vous")
+    {
         $this->pseudo = $pseudo;
         $this->email = $email;
         $this->mdp = $mdp;
@@ -23,23 +25,8 @@ class Utilisateur{
         $this->bio = $bio;
     }
 
-    public function __get($property): mixed{
-        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
-            return $this->$property;
-        }else
-        {
-            throw new InvalidPropertyValueException("Property $property is not readable for a Utilisateur.");
-        }
-    }
-
-    public function __set($property, $value): void{
-        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
-            $this->$property = $value;
-        } else {
-            throw new InvalidPropertyValueException("Property $property is not editable for a Utilisateur.");
-        }
-    }
-    public static function hasLiked($email, $idTouite): bool{
+    public static function hasLiked($email, $idTouite): bool
+    {
         $booleen = true;
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM HasLiked WHERE email = ? AND idTouite = ?';
@@ -48,10 +35,11 @@ class Utilisateur{
         $st->bindParam(2, $idTouite);
         $st->execute();
 
-        return $st->fetch() !==  false;
+        return $st->fetch() !== false;
     }
 
-    public static function getFollower($email){
+    public static function getFollower($email)
+    {
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT count(*) FROM FollowUser WHERE emailFollowed = ?';
         $st = $bd->prepare($query);
@@ -61,17 +49,48 @@ class Utilisateur{
         return $result['count(*)'];
     }
 
-    public static function hasFollow($emailFollower, $emailFollowed): bool{
+    public static function hasFollow($emailFollower, $emailFollowed): bool
+    {
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM FollowUser WHERE emailFollower = ? AND emailFollowed = ?';
         $st = $bd->prepare($query);
         $st->bindParam(1, $emailFollower);
         $st->bindParam(2, $emailFollowed);
         $st->execute();
-        return $st->fetch() !==  false;
+        return $st->fetch() !== false;
     }
 
-    public function afficherFollowers(){
+    public static function hasFollowTag($emailFollower, $idTag)
+    {
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT * FROM FollowTag WHERE email = ? AND idTag = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $emailFollower);
+        $st->bindParam(2, $idTag);
+        $st->execute();
+        return $st->fetch() !== false;
+    }
+
+    public function __get($property): mixed
+    {
+        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
+            return $this->$property;
+        } else {
+            throw new InvalidPropertyValueException("Property $property is not readable for a Utilisateur.");
+        }
+    }
+
+    public function __set($property, $value): void
+    {
+        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
+            $this->$property = $value;
+        } else {
+            throw new InvalidPropertyValueException("Property $property is not editable for a Utilisateur.");
+        }
+    }
+
+    public function afficherFollowers()
+    {
         $bd = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM Utilisateur INNER JOIN FollowUser on Utilisateur.email = FollowUser.email WHERE email = ?';
         $st = $bd->prepare($query);
@@ -80,14 +99,5 @@ class Utilisateur{
         $html = '';
         foreach ($st->fetch() as $follower) {
         }
-    }
-    public static function hasFollowTag($emailFollower, $idTag){
-        $bd = ConnectionFactory::makeConnection();
-        $query = 'SELECT * FROM FollowTag WHERE email = ? AND idTag = ?';
-        $st = $bd->prepare($query);
-        $st->bindParam(1, $emailFollower);
-        $st->bindParam(2, $idTag);
-        $st->execute();
-        return $st->fetch() !==  false;
     }
 }

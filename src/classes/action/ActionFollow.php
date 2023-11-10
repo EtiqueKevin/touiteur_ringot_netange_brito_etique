@@ -4,7 +4,8 @@ namespace touiteur\action;
 
 use touiteur\DataBase\ConnectionFactory;
 
-class ActionFollow extends Action{
+class ActionFollow extends Action
+{
 
     public function execute(): string
     {
@@ -35,9 +36,9 @@ class ActionFollow extends Action{
                 $st->execute();
                 $result = $st->fetch();
                 $pseudo = $result['pseudo'];
-                header('location: ?action=ActionUtilisateur&pseudo='.$pseudo.'&page=1');
+                header('location: ?action=ActionUtilisateur&pseudo=' . $pseudo . '&page=1');
             }
-        }else{
+        } else {
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
             header('location: ?action=gate');
         }

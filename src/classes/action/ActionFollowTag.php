@@ -4,7 +4,8 @@ namespace touiteur\action;
 
 use touiteur\DataBase\ConnectionFactory;
 
-class ActionFollowTag extends Action{
+class ActionFollowTag extends Action
+{
 
     public function execute(): string
     {
@@ -29,9 +30,9 @@ class ActionFollowTag extends Action{
                 $st->bindParam(2, $tag);
                 $st->execute();
 
-                header('location: ?action=tag-list-touite&idTag='.$tag.'&page=1');
+                header('location: ?action=tag-list-touite&idTag=' . $tag . '&page=1');
             }
-        }else{
+        } else {
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
             header('location: ?action=gate');
         }

@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-use touiteur\action\ActionConnexion;
-use touiteur\action\ActionInscription;
-use touiteur\dispatch\Dispatcher;
+
 use touiteur\DataBase\ConnectionFactory;
+use touiteur\dispatch\Dispatcher;
 
 require_once 'vendor/autoload.php';
 

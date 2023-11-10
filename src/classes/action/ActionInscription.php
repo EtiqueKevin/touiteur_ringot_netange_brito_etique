@@ -2,21 +2,23 @@
 
 namespace touiteur\action;
 
-use touiteur\action\Action;
 use touiteur\auth\Auth;
 use touiteur\auth\AuthException;
-class ActionInscription extends Action {
 
-    public function execute(): string{
+class ActionInscription extends Action
+{
+
+    public function execute(): string
+    {
 
         // réaffichage des données soumises en cas d'erreur, sauf les mots de passe
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                Auth::register($_POST['pseudo'],$_POST['passe1']);
-                $html="<p>inscription réussie</p>";
+                Auth::register($_POST['pseudo'], $_POST['passe1']);
+                $html = "<p>inscription réussie</p>";
                 header('location: ?action=gate&page=1');
-            }catch(AuthException $e){
-                $html="<p> ERROR</p>";
+            } catch (AuthException $e) {
+                $html = "<p> ERROR</p>";
                 header('location: ?action=inscription');
             }
 

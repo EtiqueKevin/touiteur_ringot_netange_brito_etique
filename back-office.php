@@ -14,9 +14,9 @@ $action = $_GET['action'] ?? 'connexion';
 
 $html = '';
 
-switch ($action){
+switch ($action) {
     case 'connexion':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $passwd = filter_var($_POST['passwd'], FILTER_SANITIZE_STRING);
 
@@ -31,13 +31,11 @@ switch ($action){
             }
             if (!password_verify($passwd, $user)) {
                 throw new Exception("erreur connexion");
-            }
-            else{
-                $html="Utilisateur trouvé";
+            } else {
+                $html = "Utilisateur trouvé";
                 $_SESSION['admin'] = true;
             }
-        }
-        else {
+        } else {
             $html = <<<HTML
             <div id="auth">
             <h1>Connexion</h1>
@@ -50,7 +48,7 @@ switch ($action){
             </div>
             HTML;
         }
-    break;
+        break;
     case 'most-followed':
         $query = 'SELECT COUNT(emailFollower) as nbFollow, emailFollowed FROM FollowUser GROUP BY emailFollowed ORDER BY nbFollow DESC LIMIT 10;';
         $st = $bdd->prepare($query);
@@ -72,22 +70,22 @@ switch ($action){
             $html .= '<tr><td>' . $row['tag'] . '</td><td>' . $row['nbTag'] . '</td></tr>';
         }
         $html .= '</table>';
-    break;
+        break;
     case 'deconnexion':
         unset($_SESSION['admin']);
-    break;
+        break;
     case 'home-page':
         $html = '<h1>HOME PAGE</h1>';
-    break;
+        break;
     default:
         $html = '<h1>ERROR</h1>';
-    break;
+        break;
 }
 
 
 $k = '';
 if (isset($_SESSION['admin'])) {
-    $k=<<<HTML
+    $k = <<<HTML
             <a href="?action=most-followed"><button class="button">Influenceur</button></a>
             <a href="?action=most-tagFollowed"><button class='button'>tag les plus utilisés</button></a>
             <a href="?action=deconnexion"><button class='button'>Déconnexion</button></a>
@@ -110,10 +108,10 @@ echo <<<HTML
             <a href=""><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
-HTML.$k.<<<HTML
+HTML. $k . <<<HTML
         </div>
     </nav>
-HTML.$html.<<<HTML
+HTML . $html . <<<HTML
     </body>
 </html>
 HTML;
