@@ -15,7 +15,7 @@ class ActionGate extends Action
             <a href="?action=inscription"><button class="button">Inscription</button></a>
             <a href="?action=connexion"><button class="button">Connexion</button></a>
             <p>Vous pouvez également consulter les derniers Touits sans être inscrit.</p>
-            <p><a href="?action=afficherTouits&page=1"><button class="button">Rejoindre en tant qu'Invité</button></a></p>
+            <p><a href="?action=home-page&page=1"><button class="button">Rejoindre en tant qu'Invité</button></a></p>
         </div>
 HTML;
         return $html;
