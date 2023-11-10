@@ -31,8 +31,8 @@ class ActionCreerTouite extends Action{
             $row = $st->fetch();
             $idT = $row['MAX(id)'] + 1;
 
-
-            if (!empty($_FILES['img']['name'])){
+            $img = $_FILES['img'];
+            if ($img['size'] > 0){
                 $fileDestination = 'ressources/' . $idT;
                 //
                 $fileType = $_FILES['img']['type'];
@@ -40,31 +40,32 @@ class ActionCreerTouite extends Action{
                     switch ($fileType) {
                         case 'image/png':
                             $fileDestination .='.png';
-                        break;
+                            break;
                         case 'image/jpeg':
                             $fileDestination .='.jpeg';
-                        break;
+                            break;
                         case 'image/jpg':
                             $fileDestination .='.jpg';
-                        break;
+                            break;
                         case 'image/gif':
                             $fileDestination .='.gif';
-                        break;
+                            break;
                         default:
                             $fileDestination .='.png';
-                        break;
-
-                        move_uploaded_file($_FILES['img']['tmp_name'], $fileDestination);
+                            break;
                     }
+
+                    move_uploaded_file($img['tmp_name'], $fileDestination);
 
                 }
                 else{
-                    $fileDestination = null;
+                    $fileDestination = "ressources/Z.png";
                 }
             }
             else{
                 $fileDestination = null;
             }
+
 
             $query = 'INSERT INTO `Touite` (`text`, `date`, `author`,`img`) VALUES (?, ?, ?, ?)';
             $stt = $bd->prepare($query);

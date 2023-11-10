@@ -7,10 +7,10 @@ use touiteur\DataBase\ConnectionFactory;
 class HomeTouite{
 
     public static function formulaire_touite(): string{
-        $html = '<form method="POST">
+        $html = '<form method="post" enctype="multipart/form-data">
             <textarea name="txtMessage"></textarea>
-            <label for="avatar">Ajouter une photo: </label>
-            <input type="file" id="image" name="image" accept="image/png, image/jpeg" /><br>
+            <label for="img">Ajouter une photo: </label>
+            <input type="file" id="img" name="img" accept="image/png, image/jpeg" /><br>
             <input type="submit" value="Publier" title="Publier mon message">
             </form>';
         return $html;
