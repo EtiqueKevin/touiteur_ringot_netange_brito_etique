@@ -114,11 +114,7 @@ a {
     padding: 5px;
   text-align: right;
 }
-/* changer l'image de l'objet img dans la navbar*/
-#like:hover {
-  background-color: #c468a8;
-  filter: invert(100%);
-}
+
 
 #unlike {
   background-color: #c468a8;
@@ -130,11 +126,7 @@ a {
     padding: 5px;
   text-align: right;
 }
-/* changer l'image de l'objet img dans la navbar*/
-#unlike:hover {
-  background-color: #86da85;
-  filter: none;
-}
+
 
 #block-touite {
   max-width: 600px;
