@@ -28,8 +28,8 @@ class ActionFollow extends Action{
                 $st->bindParam(1, $user);
                 $st->bindParam(2, $email);
                 $st->execute();
-                $ap = new ActionProfile();
-                $html = $ap->execute();
+                $au = new ActionUtilisateur();
+                $html = $au->execute();
             }
         }else{
             $html = '<h1>Vous devez être connecté pour pouvoir suivre quelqu un</h1>';
