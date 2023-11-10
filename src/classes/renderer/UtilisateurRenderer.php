@@ -14,6 +14,8 @@ class UtilisateurRenderer{
     }
 
     public function render(int $selector): string{
+        $userLog = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
+        $selector = $this->user->email === $userLog ? 1 : $selector;
 
         $html = '<div class="utilisateur">';
         $follow = Utilisateur::getFollower($this->user->email);

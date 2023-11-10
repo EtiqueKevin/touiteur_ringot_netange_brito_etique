@@ -13,8 +13,8 @@ nav {
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  position: fixed;
-  width: 100%; /* Assurez-vous que la largeur est de 100% pour occuper toute la largeur de l'écran */
+  position: sticky;
+  max-width: 100%; /* Assurez-vous que la largeur est de 100% pour occuper toute la largeur de l'écran */
   top: 0; /* Place la barre de navigation en haut de l'écran */
   z-index: 1000; /* Ajustez si nécessaire en fonction de la superposition avec d'autres éléments */
 }
@@ -59,7 +59,7 @@ nav #logo img:hover {
   background-color: #dcffd9;
   color: #000;
   max-width: 600px;
-  max-height: 320px;
+  max-height: 500px;
     padding: 20px;
   /* center the touites */
   margin-top: 40px;
@@ -67,6 +67,19 @@ nav #logo img:hover {
   margin-right: auto;
   text-align: center;
 
+}
+
+input{
+    border-radius: 15px;
+  background-color: #dcffd9;
+    border: 2px solid #000;
+    padding: 7px 15px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+#auth input {
+    margin-left: 20px;
 }
 
 a {
@@ -164,6 +177,7 @@ a {
     margin-left: auto;
     margin-right: auto;
 
+
 }
 
 
@@ -249,3 +263,53 @@ a {
   margin-right: 20px;
   font-size: 12px;
 }
+
+#tag-page {
+    background-color: #dcffd9;
+    color: #000;
+        padding: 20px;
+    /* center the touites */
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+
+#tag-top {
+  padding: 10px 20px;
+  display: flex;
+  clear: both;
+  justify-content: space-between;
+}
+
+
+#tag-head {
+  max-height: 100px;
+  max-width: 600px;
+  text-align: left;
+  /* afficher en ligne */
+  display: flex;
+  flex-direction: row;
+}
+
+.tag-name {
+  margin-left: 20px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#follow-tag {
+    color: #ffffff;
+    background-color: #3a8646;
+  max-height: 100px;
+  max-width: 200px;
+  text-align: left;
+  /* afficher en ligne */
+  display: flex;
+  flex-direction: row;
+    border-radius: 15px;
+  padding: 20px;
+  align-items: center;
+}
+

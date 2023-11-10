@@ -78,8 +78,16 @@ class Utilisateur{
         $st->bindParam(1, $this->email);
         $st->execute();
         $html = '';
-        foreach ($st->fetch() as $follower){
-
+        foreach ($st->fetch() as $follower) {
         }
+    }
+    public static function hasFollowTag($emailFollower, $idTag){
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT * FROM FollowTag WHERE email = ? AND idTag = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $emailFollower);
+        $st->bindParam(2, $idTag);
+        $st->execute();
+        return $st->fetch() !==  false;
     }
 }

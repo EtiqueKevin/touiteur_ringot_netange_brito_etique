@@ -68,15 +68,19 @@ class Home{
 
     public static function afficherTouitTag($tag): string{
         $db = ConnectionFactory::makeConnection();
-        $statement = $db->prepare("Select * from Touite inner join TouiteTag on Touite.idTag = TouiteTag.idTag where idTag = ? order by date desc");
+        $statement = $db->prepare("Select id, text, date, author, img from Touite inner join TouiteTag on Touite.id = TouiteTag.idTouite where TouiteTag.idTag = ? order by date desc");
         $statement->bindParam(1, $tag);
         $res = $statement->execute();
         $touites = $statement->fetchAll();
         $listeTouite = new ListeTouite();
         foreach ($touites as $touite) {
+            $statement = $db->prepare("Select pseudo from Utilisateur where email = ?");
+            $statement->bindParam(1, $touite['author']);
+            $res = $statement->execute();
+            $pseudo = $statement->fetch()['pseudo'];
             $nouveauTouite = null;
             $img = $touite['img'] == null ? null : $touite['img'];
-            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $touite['pseudo'], $touite['img']);
+            $nouveauTouite = new Touite($touite['id'], $touite['text'], $touite['date'], $pseudo, $img);
             $listeTouite->addTouite($nouveauTouite);}
 
         $listeTouiteRenderer = new ListeTouitesRenderer($listeTouite);

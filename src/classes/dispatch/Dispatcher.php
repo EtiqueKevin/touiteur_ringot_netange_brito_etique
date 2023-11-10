@@ -7,6 +7,7 @@ use touiteur\action\ActionCreerTouite;
 use touiteur\action\ActionDeconnexion;
 use touiteur\action\ActionDiscover;
 use touiteur\action\ActionDisplayTouite;
+use touiteur\action\ActionFollowTag;
 use touiteur\action\ActionGate;
 use touiteur\action\ActionHome;
 use touiteur\action\ActionInscription;
@@ -80,6 +81,10 @@ class Dispatcher{
             case 'tag-list-touite':
                 $d = new ActionTag();
                 $html = $d->execute();
+                break;
+                case 'followTag':
+                $f = new ActionFollowTag();
+                $html = $f->execute();
                 break;
             default:
                 $html = '<h1>Par default</h1>';
