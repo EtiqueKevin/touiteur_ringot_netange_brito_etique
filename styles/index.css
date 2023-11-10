@@ -12,10 +12,11 @@ nav {
   background-color: #3a8646;
   padding: 10px 20px;
   display: flex;
-  clear: both;
   justify-content: space-between;
-
-
+  position: fixed;
+  width: 100%; /* Assurez-vous que la largeur est de 100% pour occuper toute la largeur de l'écran */
+  top: 0; /* Place la barre de navigation en haut de l'écran */
+  z-index: 1000; /* Ajustez si nécessaire en fonction de la superposition avec d'autres éléments */
 }
 
 .button {
