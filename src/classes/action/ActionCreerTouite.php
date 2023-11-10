@@ -38,7 +38,7 @@ class ActionCreerTouite extends Action{
 
             $bd = ConnectionFactory::makeConnection();
 
-            $query = 'SELECT `MAX(id)` FROM `Touite`';
+            $query = 'SELECT MAX(id) FROM `Touite`';
             $st = $bd->prepare($query);
             $st->execute();
             $st->setFetchMode(PDO::FETCH_ASSOC);
@@ -76,7 +76,7 @@ class ActionCreerTouite extends Action{
                     $st->bindParam(1, $tg);
                     $st->execute();
                 }
-                $query = 'INSERT INTO `TouiteTag` (`idTouite`, `idTag`) VALUES (?, (SELECT `idTag` FROM `Tag` WHERE `tag` = ?))';
+                $query = 'INSERT INTO `TouiteTag` (`idTouite`, `idTag`) VALUES (?, (SELECT `id` FROM `Tag` WHERE `tag` = ?))';
                 $st = $bd->prepare($query);
                 $st->bindParam(1, $idT);
                 $st->bindParam(2, $tg);
