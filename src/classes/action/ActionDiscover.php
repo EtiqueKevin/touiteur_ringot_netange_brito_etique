@@ -11,7 +11,7 @@ class ActionDiscover
     public function execute(): string
     {
 
-        return Home::afficherTouit();
+        return Home::afficherTouit();  //affichage de la page des decouverte
 
     }
 

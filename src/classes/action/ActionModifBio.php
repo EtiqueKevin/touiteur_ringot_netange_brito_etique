@@ -3,7 +3,6 @@
 namespace touiteur\action;
 
 use touiteur\DataBase\ConnectionFactory;
-use touiteur\utilisateur\Utilisateur;
 
 //Action permettant de modifier la bio
 class ActionModifBio extends Action{
@@ -12,26 +11,19 @@ class ActionModifBio extends Action{
     public function execute(): string{
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $bio = $_POST['bio'];
-            $mail = unserialize($_SESSION['user'])->email;
+            $bio = $_POST['bio']; //recuperation de la nouvelle biographie
+            $mail = unserialize($_SESSION['user'])->email; //recuperation de l'email de l'utilisateur
             $bd = ConnectionFactory::makeConnection();
+            //mise à jour de la biographie dans la base de donnee
             $sql = "UPDATE Utilisateur SET bio = ? WHERE email = ?";
             $st = $bd->prepare($sql);
             $st->bindParam(1, $bio);
             $st->bindParam(2, $mail);
             $st->execute();
-
-            $sql = "SELECT * FROM Utilisateur WHERE email = ?";
-            $st = $bd->prepare($sql);
-            $st->bindParam(1, $mail);
-            $st->execute();
-            $row = $st->fetch();
-            $pdp = $row['pdp'] !== null ? $row['pdp'] : "ressources/Z.png";
-            $_SESSION['user'] = serialize(new Utilisateur($row['pseudo'], $row['email'], $row['mdp'], $row['role'], $pdp, $row['bio']));
             $html = "<p>Modification réussie</p>";
-            header('location: ?action=page-utilisateur&page=1');
+            header('location: ?action=page-utilisateur'); //redirection vers la page de l'utilisateur
         }
-        else{
+        else{ //formulaire de modification de la biographie
             $html =<<<HTML
             <div>
             

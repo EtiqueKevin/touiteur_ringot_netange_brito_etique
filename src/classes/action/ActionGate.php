@@ -7,6 +7,7 @@ class ActionGate extends Action
 
     public function execute(): string
     {
+        //affichage de la page du portail avec des actions sur les boutons
         $html = <<<HTML
         <div id="gate">
             <p>Bienvenue sur Touiteur, le réseau social de l'avenir !</p>

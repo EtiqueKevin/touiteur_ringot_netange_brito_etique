@@ -2,7 +2,9 @@
 
 
 namespace touiteur\action;
-
+/**
+ * Class asbtraite action qui definit une methode execute pour toutes les actions
+ */
 abstract class Action
 {
 

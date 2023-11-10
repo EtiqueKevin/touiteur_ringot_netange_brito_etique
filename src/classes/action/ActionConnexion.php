@@ -13,15 +13,16 @@ class ActionConnexion extends Action
         // réaffichage des données soumises en cas d'erreur, sauf les mots de passe
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                Auth::authenticate($_POST['email'], $_POST['passe']);
-                Auth::loadProfile($_POST['email']);
+                Auth::authenticate($_POST['email'], $_POST['passe']); //authentification de l'utilisateur
+                Auth::loadProfile($_POST['email']); //chargement du profil de l'utilisateur
                 $html = "<p>Connexion réussie</p>";
-                header('location: ?action=home-page&page=1');
-            } catch (AuthException $e) {
+                header('location: ?action=home-page&page=1'); //redirection vers la page d'accueil
+            } catch (AuthException $e) { //en cas d'erreur lors de la connexion
                 $html = "<p> Connexion échoué</p>";
                 $html .= "<a href='?action=gate'>Ressayer</a>";
             }
         } else {
+            //formulaire de connexion à afficher dans le cas d'une méthode get
             $html = '<div id="auth"> 
                 <h1>Connexion</h1> 
                 <form method="post">';
