@@ -18,7 +18,8 @@ class UtilisateurRenderer
     public function render(int $selector): string
     {
         $userLog = isset($_SESSION['user']) ? unserialize($_SESSION['user']) : null;
-        $selector = $this->user->email === $userLog->email ? 3 : $selector;
+        if($selector !== 4){
+        $selector = $this->user->email === $userLog->email ? 3 : $selector;}
 
         $html = '<div class="utilisateur">';
         $follow = Utilisateur::getFollower($this->user->email);
@@ -63,19 +64,29 @@ class UtilisateurRenderer
                   <div id="profil-head">
                 <img class="profil-pdp" src=' . $pdp . ' alt="pdp"><p class="profil-pseudo">' . $this->user->__get('pseudo') . '</p></div><br>
                 <div id="follow-profil">
-                <p class="number-follow">' . $follow . ' Followers</p>
+                <a href="?action=narcisse"><p class="number-follow">' . $follow . ' Followers</p></a>
                  </div></div>
                  <div id="edit-profil">
                  <a href="?action=edit-pdp"><button class="button">Changer de pdp</button></a>
                  <a href="?action=edit-bio"><button class="button">Changer de bio</button></a>
-</div>
-                ';
+                  </div>';
+                break;  }
+                case 4 :{
+                    $html .= '<div id="profil-display">
+                       <div id="profil-display-top">
+                      <div id="profil-display-head">
+                    <img class="profil-display-pdp" src=' . $pdp . ' alt="pdp"><p class="profil-pseudo">' . $this->user->__get('pseudo') . '</p></div><br>
+                    <div id="follow-profil">
+                    <a href="?action=narcisse"><p class="number-follow">' . $follow . ' Followers</p></a>
+                     </div></div></div>';
+                    break;
+                }
 
             }
-        }
+        if($selector !== 4){
         $html .= '<p class="profil-bio">' . $this->user->__get('bio') . '</p><br>
                 </div>';
-        $html .= Home::AfficherTouitEmail($this->user->__get('email'));
+        $html .= Home::AfficherTouitEmail($this->user->__get('email'));}
 
         return $html;
     }

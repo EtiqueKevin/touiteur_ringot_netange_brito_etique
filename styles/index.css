@@ -367,3 +367,32 @@ a {
     height: 100px;
     resize: none;
 }
+
+#profil-display {
+    border-radius: 15px;
+    background-color: #dcffd9;
+    color: #000;
+    max-width: 600px;
+    max-height: 320px;
+    padding: 20px;
+    /* center the touites */
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+#profil-display-head {
+    max-height: 100px;
+    max-width: 600px;
+    text-align: left;
+    /* afficher en ligne */
+    display: flex;
+    flex-direction: row;
+}
+
+#profil-display-head img {
+    width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 50%;
+}

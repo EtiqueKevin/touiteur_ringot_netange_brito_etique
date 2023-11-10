@@ -3,6 +3,7 @@
 namespace touiteur\action;
 
 use touiteur\DataBase\ConnectionFactory;
+use touiteur\utilisateur\Utilisateur;
 
 //Action permettant de modifier la bio
 class ActionModifBio extends Action{
@@ -19,8 +20,16 @@ class ActionModifBio extends Action{
             $st->bindParam(1, $bio);
             $st->bindParam(2, $mail);
             $st->execute();
+
+            $sql = "SELECT * FROM Utilisateur WHERE email = ?";
+            $st = $bd->prepare($sql);
+            $st->bindParam(1, $mail);
+            $st->execute();
+            $row = $st->fetch();
+            $pdp = $row['pdp'] !== null ? $row['pdp'] : "ressources/Z.png";
+            $_SESSION['user'] = serialize(new Utilisateur($row['pseudo'], $row['email'], $row['mdp'], $row['role'], $pdp, $row['bio']));
             $html = "<p>Modification réussie</p>";
-            header('location: ?action=page-utilisateur');
+            header('location: ?action=page-utilisateur&page=1');
         }
         else{
             $html =<<<HTML
