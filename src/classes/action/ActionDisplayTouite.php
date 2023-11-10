@@ -11,7 +11,9 @@ class ActionDisplayTouite extends Action
 
     public function execute(): string
     {
-        $id = $_GET['idTouite'];
+
+
+        $id = filter_var( $_GET['idTouite'], FILTER_SANITIZE_NUMBER_INT);
         $db = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM Touite WHERE id = ?';
         $st = $db->prepare($query);

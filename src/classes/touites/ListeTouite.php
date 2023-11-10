@@ -37,27 +37,4 @@ class ListeTouite
     {
         return $this->listeTouite;
     }
-
-    public function getTouitesByTag(string $tag)
-    {
-        $listeTouiteByTag = array();
-        foreach ($this->listeTouite as $touite) {
-            if ($touite->getTag() == $tag) {
-                array_push($listeTouiteByTag, $touite);
-            }
-        }
-        return $listeTouiteByTag;
-    }
-
-    public function getTouitesByDate(string $date)
-    {
-        $listeTouiteByDate = array();
-        foreach ($this->listeTouite as $touite) {
-            if ($touite->getDate() == $date) {
-                array_push($listeTouiteByDate, $touite);
-            }
-        }
-        return $listeTouiteByDate;
-    }
-
 }

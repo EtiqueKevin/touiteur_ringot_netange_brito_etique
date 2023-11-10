@@ -11,8 +11,8 @@ class HomeTouite
     {
         $html = '<form method="post" enctype="multipart/form-data">
             <div id="new-touite">
-            <textarea name="txtMessage"></textarea><br>
-            <label for="img">Ajouter une photo: </label><input type="file" id="img" name="img" accept="image/png, image/jpeg" /><br>
+            <textarea name="txtMessage" maxlength="255"></textarea><br>
+            <label for="img">Ajouter une photo: </label><input type="file" id="img" name="img" accept="image/png, image/jpeg, image/jpg, image/gif" /><br>
             <input type="submit" value="Publier" title="Publier mon message"></div>
             </form>';
         return $html;
@@ -36,14 +36,15 @@ class HomeTouite
      * @param string $cuit texte du blaba
      * @return string Texte du blaba avec les liens
      */
-    public static function active_tag(string $touite): string
-    {
+    public static function active_tag(string $touite): string{
+
         return preg_replace_callback('/(?<=([^&])|^)#([a-zA-Z0-9éâîôùèçàïû]+)/',
             function ($matches) {
                 $b = ConnectionFactory::makeConnection();
+                $m = filter_var($matches[2], FILTER_SANITIZE_STRING);
                 $query = 'SELECT id FROM `Tag` WHERE tag = ?';
                 $st = $b->prepare($query);
-                $st->bindParam(1, $matches[2]);
+                $st->bindParam(1, $m);
                 $st->execute();
 
 

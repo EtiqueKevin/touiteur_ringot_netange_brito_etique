@@ -13,6 +13,7 @@ class ActionTag extends Action
     {
         $button = "";
         $idTag = $_GET['idTag'];
+        $idTag = filter_var($idTag, FILTER_SANITIZE_NUMBER_INT);
         $db = ConnectionFactory::makeConnection();
         $query = 'SELECT * FROM Tag WHERE id = ?';
         $st = $db->prepare($query);
