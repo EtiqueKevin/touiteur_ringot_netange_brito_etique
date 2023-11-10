@@ -15,26 +15,41 @@ class UtilisateurRenderer{
 
     public function render(int $selector): string{
         $html = '<div class="utilisateur">';
-        switch ($selector) {
-            case 1:
-                try {
-
+        $follow = Utilisateur::getFollower($this->user->email);
                     $pdp = $this->user->__get('photo');
                     $html .= '<div id="profil-page">
                    <div id="profil-top">
                   <div id="profil-head">
                 <img class="profil-pdp" src='.$pdp.' alt="pdp"><p class="profil-pseudo">'.$this->user->__get('pseudo').'</p></div><br>
                 <div id="follow-profil">
-                <p class="number-follow">0 Follow</p> <a href="?action=follow&email='.$this->user->email.'"><p class="button">Follows</p></a></div></div>
-                <p class="profil-bio">'.$this->user->__get('bio').'</p><br>
-                </div>';
-                    $html .= Home::AfficherTouitEmail($this->user->__get('email'));
+                <p class="number-follow">'. $follow . ' Follow</p>';
+        switch ($selector) {
+            case 1:
+                try {
+                    $html .= '
+                 </div></div>
+                ';
+
+                }
+                catch (InvalidPropertyValueException $e){
+                    echo "prob";
+                }
+                break;
+            case 2:
+                try {
+                    $html .= '
+                 <a href="?action=follow&email='.$this->user->email.'"><p class="button">Follows</p></a></div></div>
+                ';
+
                 }
                 catch (InvalidPropertyValueException $e){
                     echo "prob";
                 }
                 break;
         }
+        $html .= '<p class="profil-bio">'.$this->user->__get('bio').'</p><br>
+                </div>';
+        $html .= Home::AfficherTouitEmail($this->user->__get('email'));
 
        return $html;     
     }   

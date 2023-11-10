@@ -26,7 +26,8 @@ class Utilisateur{
     public function __get($property): mixed{
         if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
             return $this->$property;
-        } else {
+        }else
+        {
             throw new InvalidPropertyValueException("Property $property is not readable for a Utilisateur.");
         }
     }
@@ -48,6 +49,20 @@ class Utilisateur{
         $st->execute();
 
         return $st->fetch() !==  false;
+    }
+
+    public static function getFollower($email){
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT count(*) FROM followuser WHERE emailFollowed = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $email);
+        $st->execute();
+        $result = $st->fetch();
+        return $result['count(*)'];
+
+
+
+
     }
 
 
