@@ -14,6 +14,7 @@ class UtilisateurRenderer{
     }
 
     public function render(int $selector): string{
+
         $html = '<div class="utilisateur">';
         $follow = Utilisateur::getFollower($this->user->email);
                     $pdp = $this->user->__get('photo');
@@ -22,7 +23,7 @@ class UtilisateurRenderer{
                   <div id="profil-head">
                 <img class="profil-pdp" src='.$pdp.' alt="pdp"><p class="profil-pseudo">'.$this->user->__get('pseudo').'</p></div><br>
                 <div id="follow-profil">
-                <p class="number-follow">'. $follow . ' Follow</p>';
+                <p class="number-follow">'. $follow . ' Followers</p>';
         switch ($selector) {
             case 1:
                 try {
@@ -37,9 +38,10 @@ class UtilisateurRenderer{
                 break;
             case 2:
                 try {
-                    $html .= '
-                 <a href="?action=follow&email='.$this->user->email.'"><p class="button">Follows</p></a></div></div>
-                ';
+                    $user = unserialize($_SESSION['user']);
+                    $html .= Utilisateur::hasFollow($user->email, $this->user->email) ? '
+                 <a href="?action=follow&email='.$this->user->email.'"><p class="button">Unfollow</p></a></div></div>
+                ' : '<a href="?action=follow&email='.$this->user->email.'"><p class="button">Follow</p></a></div></div>';
 
                 }
                 catch (InvalidPropertyValueException $e){

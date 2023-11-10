@@ -19,7 +19,9 @@ class ActionUtilisateur extends Action
         $st->bindParam(1, $pseudo);
         $st->execute();
         $result = $st->fetch();
-        $user = new Utilisateur($result['pseudo'], $result['email'], $result['mdp'], $result['role'], $result['pdp'], $result['bio']);
-        return (new UtilisateurRenderer($user))->render(3);
+        $pdp = $result['pdp'] === null ? "ressources/Z.png" : $result['photo'];
+        $bio = $result['bio'] === null ? "Exprimez-vous" : $result['bio'];
+        $user = new Utilisateur($result['pseudo'], $result['email'], $result['mdp'], $result['role'], $pdp, $bio);
+        return isset($_SESSION['user']) ? (new UtilisateurRenderer($user))->render(2) : (new UtilisateurRenderer($user))->render(1);
     }
 }

@@ -12,6 +12,7 @@ use touiteur\action\ActionInscription;
 use touiteur\action\ActionLike;
 use touiteur\action\ActionProfile;
 use touiteur\action\ActionFollow;
+use touiteur\action\ActionUtilisateur;
 
 
 require_once 'vendor/autoload.php';
@@ -66,6 +67,10 @@ class Dispatcher{
                 $f = new ActionFollow();
                 $html = $f->execute();
                 break;
+                case 'ActionUtilisateur':
+                    $f = new ActionUtilisateur();
+                    $html = $f->execute();
+                    break;
             default:
                 $html = '<h1>Par default</h1>';
             break;
