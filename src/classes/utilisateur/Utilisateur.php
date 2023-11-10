@@ -71,5 +71,15 @@ class Utilisateur{
         return $st->fetch() !==  false;
     }
 
-
+    public function AfficherFollowers(){
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT * FROM Utilisateur INNER JOIN FollowUser on Utilisateur.email = FollowUser.email WHERE email = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $this->email);
+        $st->execute();
+        $html = '';
+        foreach ($st->fetch() as $follower){
+            
+        }
+    }
 }
