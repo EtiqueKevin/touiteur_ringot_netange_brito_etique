@@ -84,9 +84,9 @@ class Touite{
      */
     public static function getLikes($id) : int{
         $bd = ConnectionFactory::makeConnection();
-        $query = 'SELECT likes FROM Touite WHERE likes = ?';
+        $query = 'SELECT likes FROM Touite WHERE id = ?';
         $st = $bd->prepare($query);
-        $st->bindParam(1, $email);
+        $st->bindParam(1, $id);
         $st->execute();
         $result = $st->fetch();
         return $result === false ? 0 : $result['likes'];

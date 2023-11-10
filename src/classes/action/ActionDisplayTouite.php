@@ -16,14 +16,19 @@ class ActionDisplayTouite extends Action
         //on recupere l'id du touite a afficher
         $id = filter_var( $_GET['idTouite'], FILTER_SANITIZE_NUMBER_INT);
         $db = ConnectionFactory::makeConnection();
-        //on recupere le touite dans la base de donnee depuis son id
         $query = 'SELECT * FROM Touite WHERE id = ?';
         $st = $db->prepare($query);
         $st->bindParam(1, $id);
         $st->execute();
         $result = $st->fetch();
+        //on recupere le pseudo
+        $sql = 'SELECT * FROM Utilisateur WHERE email = ?';
+        $st = $db->prepare($sql);
+        $st->bindParam(1, $result['author']);
+        $st->execute();
+        $row = $st->fetch();
         //on cree un objet touite avec le resultat de la requete
-        $touite = new Touite($result['id'], $result['text'], $result['date'], $result['author'], $result['img']);
+        $touite = new Touite($result['id'], $result['text'], $result['date'], $row['pseudo'], $result['img']);
         //on retourne le rendu du touite avec un renderer
         return (new TouiteRenderer($touite))->render(3);
     }

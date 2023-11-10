@@ -130,7 +130,7 @@ class Utilisateur
      * @throws InvalidPropertyValueException
      */
     public function __get($property): mixed{
-        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio') {
+        if ($property === 'pseudo' || $property === 'email' || $property === 'mdp' || $property === 'photo' || $property === 'bio' || $property === 'role') {
             return $this->$property;
         } else {
             throw new InvalidPropertyValueException("Property $property is not readable for a Utilisateur.");

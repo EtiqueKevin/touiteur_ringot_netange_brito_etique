@@ -12,8 +12,7 @@ class ActionUtilisateur extends Action
     public function execute(): string
     {
 
-        $pseudo = $_GET['pseudo']; //recuperation du pseudo de l'utilisateur
-        $pseudo = filter_var($pseudo, FILTER_SANITIZE_STRING);
+        $pseudo = $_GET['pseudo'];
         $db = ConnectionFactory::makeConnection();
         //recuperation des informations de l'utilisateur
         $query = 'SELECT * FROM Utilisateur WHERE pseudo = ?';
