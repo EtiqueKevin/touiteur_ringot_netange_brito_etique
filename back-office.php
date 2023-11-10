@@ -39,12 +39,15 @@ switch ($action){
         }
         else {
             $html = <<<HTML
+            <div id="auth">
+            <h1>Connexion</h1>
             <form method="post">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" required><br><br>
                 <label for="passwd">Mot de passe</label>
-                <input type="password" name="passwd" id="passwd" required>
+                <input type="password" name="passwd" id="passwd" required><br><br>
                 <input type="submit" value="Envoyer">
+            </div>
             HTML;
         }
     break;
@@ -72,6 +75,9 @@ switch ($action){
     break;
     case 'deconnexion':
         unset($_SESSION['admin']);
+    break;
+    case 'home-page':
+        $html = '<h1>HOME PAGE</h1>';
     break;
     default:
         $html = '<h1>ERROR</h1>';
@@ -101,7 +107,7 @@ echo <<<HTML
     <body>
     <nav class='navbar'>
         <div id='logo' >
-            <a href="?action=home-page"><img src='ressources/logo_blanc.png' alt='logo' > </a>
+            <a href=""><img src='ressources/logo_blanc.png' alt='logo' > </a>
         </div>
         <div id='profil'>
 HTML.$k.<<<HTML
