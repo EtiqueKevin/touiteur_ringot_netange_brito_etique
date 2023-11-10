@@ -7,15 +7,25 @@ use touiteur\DataBase\ConnectionFactory;
 use touiteur\utilisateur\Utilisateur;
 use User;
 
+/**
+ *
+ */
 class Auth
 {
     /**
+     * La fonction test si les informations données dans le formulaire de connexion sont valides.
+     *  Puis connect l'utiliseur à son compte.
+     *
+     * @param string $email corresppond au pseudo entrée pour s'inscrire
+     * @param string $passwd correspond au mot de passe entrée pour s'inscrire
+     * @return void
      * @throws AuthException
      */
     public static function authenticate(string $email, string $passwd): string
     {
         $bd = ConnectionFactory::makeConnection();
 
+        //Recherche d'un utilisateur dans la base de donnée
         $query = 'SELECT `mdp` FROM Utilisateur WHERE `email` = ?';
         $st = $bd->prepare($query);
         $st->bindParam(1, $email);
@@ -34,6 +44,15 @@ class Auth
 
     }
 
+    /**
+     * La fonction test si les informations données dans le formulaire d'inscription sont valides.
+     * Puis enregistre l'utilisateur dans la base de données.
+     *
+     * @param string $pseudo    corresppond au pseudo entrée pour s'inscrire
+     * @param string $passwd    correspond au mot de passe entrée pour s'inscrire
+     * @return void
+     * @throws AuthException
+     */
     public static function register(string $pseudo, string $passwd): void
     {
         $bd = ConnectionFactory::makeConnection();
@@ -49,6 +68,7 @@ class Auth
             throw new AuthException("Un compte existe déjà avec cet identifiant.");
         }
 
+        //Appel des fonctions de vérification
         $pseudoOK = self::checkPseudo($pseudo);
         $pwdOK = self::checkPasswordStrength($passwd, 8);
         $emailOK = self::checkEmail($_POST['email']);
@@ -70,6 +90,13 @@ class Auth
 
     }
 
+    /**
+     * La fonction vérifie que le mot de passe contient des caractères alpha-numérique
+     * Et de taille comprise entre 4 et 32.
+     *
+     * @param string $pseudo
+     * @return bool
+     */
     public static function checkPseudo(string $pseudo): bool
     {
         //Vérification de la validité du pseudo
@@ -80,6 +107,13 @@ class Auth
         return true;
     }
 
+    /**
+     * La fonction test si le mot de passe corespond au caractéristique demandé.
+     *
+     * @param string $pass
+     * @param int $minimumLength
+     * @return bool
+     */
     public static function checkPasswordStrength(string $pass, int $minimumLength): bool
     {
 
@@ -93,6 +127,12 @@ class Auth
         return !$length;
     }
 
+    /**
+     * La fonction vérifie si l'email est valide.
+     *
+     * @param string $email
+     * @return bool
+     */
     public static function checkEmail(string $email): bool
     {
         if (empty($email)) {
@@ -112,6 +152,12 @@ class Auth
         return true;
     }
 
+    /**
+     * La fonction permet de créer une session
+     *
+     * @param string $email
+     * @return void
+     */
     public static function loadProfile(string $email): void
     {
         $bd = ConnectionFactory::makeConnection();
