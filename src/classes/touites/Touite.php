@@ -5,6 +5,8 @@ namespace touiteur\touites;
 use touiteur\DataBase\ConnectionFactory;
 use touiteur\exception\InvalidPropertyNameException;
 use touiteur\exception\InvalidPropertyValueException;
+use PDO;
+
 
 class Touite{
     private $id;
@@ -34,10 +36,6 @@ class Touite{
             $st->bindParam(1, $id);
             $st->execute();
 
-    }
-
-    public function dislike(): void{
-        $this->likes--;
     }
 
     public function __get($property): mixed{
@@ -75,5 +73,15 @@ class Touite{
 
         return $jj.$mois[$mm].substr($this->date, 0, -4); //fonctionne même si l'année est inférieure à 1000
 
+    }
+
+    public static function getLikes($id){
+        $bd = ConnectionFactory::makeConnection();
+        $query = 'SELECT likes FROM Touite WHERE likes = ?';
+        $st = $bd->prepare($query);
+        $st->bindParam(1, $email);
+        $st->execute();
+        $result = $st->fetch();
+        return $result === false ? 0 : $result['likes'];
     }
 }

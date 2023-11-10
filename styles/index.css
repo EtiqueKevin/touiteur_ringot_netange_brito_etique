@@ -226,3 +226,33 @@ a {
   margin-left: 20px;
   font-size: 12px;
 }
+
+.touite-content-full {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+
+}
+
+
+#likes-counter {
+  max-height: 100px;
+  max-width: 170px;
+  text-align: right;
+  /* afficher en ligne */
+  display: flex;
+  flex-direction: row;
+  border-radius: 15px;
+  padding: 20px;
+    align-items: center;
+}
+
+#likes-counter .button {
+    margin-left: 20px;
+    display: block;
+}
+.number-likes {
+  color: white;
+  margin-right: 20px;
+  font-size: 12px;
+}
