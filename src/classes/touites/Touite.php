@@ -65,14 +65,23 @@ class Touite{
      * @return string            La date sous la forme jj mois aaaa (1 janvier 2000)
      */
     public function aff_date():string{
+
         $mois = array('', ' janvier ', ' février ', ' mars ', ' avril ', ' mai ', ' juin',
             ' juillet ', ' aôut ', ' septembre ', ' octobre ', ' novembre ', ' décembre ');
 
-        $jj = (int)substr($this->date, -2);
-        $mm = (int)substr($this->date, -4, 2);
+        $jj = (int)substr($this->date, 8, 2);
+        $mm = (int)substr($this->date, 5, 2);
+        $aaaa = substr($this->date, 0, 4);
 
-        return $jj.$mois[$mm].substr($this->date, 0, -4); //fonctionne même si l'année est inférieure à 1000
+        $h = (int)substr($this->date, 10, 3);
+        $m = substr($this->date, 14, 2);
 
+        if (! is_numeric($m) && ($m == (int) $m)){ //$heure est une chaîne provenant de la BdD, donc méfiance
+            $m = '00';
+        }
+        $heure = "{$h}h{$m}";
+
+        return $jj . $mois[$mm] . $aaaa.'  '. $heure;
     }
 
     public static function getLikes($id){
